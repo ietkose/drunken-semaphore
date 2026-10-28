@@ -72,10 +72,18 @@ const translations = {
         bldOregon: "Welcome to Oregon", bldKawaii: "Kawaii Space",
         
         radioLos40: "LOS40",
-        radioCowboy: "Wild West Saloon", radioCyber: "Cyberpunk Skyscraper", radioDark: "Cursed Cathedral",
-        radioLight: "Dragon's Sanctuary", radioJazz: "New York Velvet Jazz", radioRock: "Children of Democracy Motor Club",
-        radioOregon: "Welcome to Oregon", radioKawaii: "Kawaii Space",
-        radioLofi: "Wild West Saloon", radioSynth: "Cyberpunk Skyscraper", radioSpace: "Cursed Cathedral", radioPiano: "Dragon's Sanctuary",
+        radioTrtRadyo3: "TRT Radyo 3",
+        radioBbcWorld: "BBC World Service",
+        radioKexp: "KEXP 90.3 FM",
+        radioRadioParadise: "Radio Paradise",
+        radioFipParis: "FIP Paris",
+        radioNtsRadio: "NTS Radio",
+        radioClassicFm: "Classic FM",
+        radioPowerFm: "Power FM",
+        radioCowboy: "KEXP 90.3 FM", radioCyber: "NTS Radio", radioDark: "Radio Paradise",
+        radioLight: "FIP Paris", radioJazz: "TRT Radyo 3", radioRock: "Power FM",
+        radioOregon: "Classic FM", radioKawaii: "BBC World Service",
+        radioLofi: "KEXP 90.3 FM", radioSynth: "NTS Radio", radioSpace: "Radio Paradise", radioPiano: "FIP Paris",
         radioConnecting: "Connecting to station...", radioErrorFallback: "Stream unavailable",
         
         mapSubtitle: "CHOOSE YOUR VIBE", mapExplore: "EXPLORE", hudEnter: "Enter", hudTapEnter: "Tap to Enter",
@@ -137,10 +145,18 @@ const translations = {
         bldOregon: "Oregon'a Hoşgeldiniz", bldKawaii: "Tatlış Uzay",
         
         radioLos40: "LOS40",
-        radioCowboy: "Vahşi Batı Salon", radioCyber: "Cyberpunk Gökdelen", radioDark: "Lanetli Katedral",
-        radioLight: "Ejderhanın Sığınağı", radioJazz: "New York Kadife Caz", radioRock: "Demokrasinin Çocukları Motor Kulübü",
-        radioOregon: "Oregon'a Hoşgeldiniz", radioKawaii: "Tatlış Uzay",
-        radioLofi: "Vahşi Batı Salon", radioSynth: "Cyberpunk Gökdelen", radioSpace: "Lanetli Katedral", radioPiano: "Ejderhanın Sığınağı",
+        radioTrtRadyo3: "TRT Radyo 3",
+        radioBbcWorld: "BBC World Service",
+        radioKexp: "KEXP 90.3 FM",
+        radioRadioParadise: "Radio Paradise",
+        radioFipParis: "FIP Paris",
+        radioNtsRadio: "NTS Radio",
+        radioClassicFm: "Classic FM",
+        radioPowerFm: "Power FM",
+        radioCowboy: "KEXP 90.3 FM", radioCyber: "NTS Radio", radioDark: "Radio Paradise",
+        radioLight: "FIP Paris", radioJazz: "TRT Radyo 3", radioRock: "Power FM",
+        radioOregon: "Classic FM", radioKawaii: "BBC World Service",
+        radioLofi: "KEXP 90.3 FM", radioSynth: "NTS Radio", radioSpace: "Radio Paradise", radioPiano: "FIP Paris",
         radioConnecting: "İstasyona bağlanıyor...", radioErrorFallback: "Yayın açılamadı",
 
         mapSubtitle: "MEKANINI SEÇ", mapExplore: "KEŞFET", hudEnter: "Giriş Yap", hudTapEnter: "Giriş İçin Dokun",
@@ -255,18 +271,14 @@ function applyTranslations() {
     const lKaw = document.querySelector('.lobby-txt-kawaii'); if (lKaw) lKaw.innerText = t.bldKawaii;
 
     const rLos = document.querySelector('.radio-txt-los40'); if (rLos) rLos.innerText = t.radioLos40 || 'LOS40';
-    const rCow = document.querySelector('.radio-txt-cowboy'); if (rCow) rCow.innerText = t.radioCowboy;
-    const rCyb = document.querySelector('.radio-txt-cyber'); if (rCyb) rCyb.innerText = t.radioCyber;
-    const rDar = document.querySelector('.radio-txt-dark'); if (rDar) rDar.innerText = t.radioDark;
-    const rLig = document.querySelector('.radio-txt-light'); if (rLig) rLig.innerText = t.radioLight;
-    const rJaz = document.querySelector('.radio-txt-jazz'); if (rJaz) rJaz.innerText = t.radioJazz;
-    const rRck = document.querySelector('.radio-txt-rock'); if (rRck) rRck.innerText = t.radioRock;
-    const rOre = document.querySelector('.radio-txt-oregon'); if (rOre) rOre.innerText = t.radioOregon;
-    const rKaw = document.querySelector('.radio-txt-kawaii'); if (rKaw) rKaw.innerText = t.radioKawaii;
-    const rLof = document.querySelector('.radio-txt-lofi'); if (rLof) rLof.innerText = t.radioLofi;
-    const rSyn = document.querySelector('.radio-txt-synth'); if (rSyn) rSyn.innerText = t.radioSynth;
-    const rSpa = document.querySelector('.radio-txt-space'); if (rSpa) rSpa.innerText = t.radioSpace;
-    const rPia = document.querySelector('.radio-txt-piano'); if (rPia) rPia.innerText = t.radioPiano;
+    const rTrt = document.querySelector('.radio-txt-trt-radyo-3'); if (rTrt) rTrt.innerText = t.radioTrtRadyo3 || 'TRT Radyo 3';
+    const rBbc = document.querySelector('.radio-txt-bbc-world'); if (rBbc) rBbc.innerText = t.radioBbcWorld || 'BBC World Service';
+    const rKex = document.querySelector('.radio-txt-kexp'); if (rKex) rKex.innerText = t.radioKexp || 'KEXP 90.3 FM';
+    const rPar = document.querySelector('.radio-txt-radio-paradise'); if (rPar) rPar.innerText = t.radioRadioParadise || 'Radio Paradise';
+    const rFip = document.querySelector('.radio-txt-fip-paris'); if (rFip) rFip.innerText = t.radioFipParis || 'FIP Paris';
+    const rNts = document.querySelector('.radio-txt-nts-radio'); if (rNts) rNts.innerText = t.radioNtsRadio || 'NTS Radio';
+    const rCls = document.querySelector('.radio-txt-classic-fm'); if (rCls) rCls.innerText = t.radioClassicFm || 'Classic FM';
+    const rPow = document.querySelector('.radio-txt-power-fm'); if (rPow) rPow.innerText = t.radioPowerFm || 'Power FM';
 
     const txtLoadVis = document.querySelector('.txt-load-visual'); if (txtLoadVis) txtLoadVis.innerText = t.loadVisual;
     const txtMyM = document.querySelector('.txt-my-music'); if (txtMyM) txtMyM.innerText = t.myMusic;
@@ -1559,74 +1571,83 @@ class AudioManager {
         this.freqKeys = Object.keys(this.frequencies);
         this.currentFreqIndex = 0;
 
-        // Canlı Radyo İstasyonları (Temalara Özel Canlı Stream URL'leri + LOS40)
+        // Canlı Radyo İstasyonları (Dünyanın Dört Bir Yanından Popüler İstasyonlar + LOS40 + TRT Radyo 3)
         this.radioStations = {
             'los40': {
                 id: 'los40',
                 name: { en: 'LOS40', tr: 'LOS40' },
                 url: 'https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40.mp3',
-                credit: { en: 'Live: LOS40 España (Todos Los Éxitos)', tr: 'Canlı: LOS40 İspanya (Popüler Hit Müzik)' }
+                credit: { en: 'Live: LOS40 España (Madrid - Pop & Hits)', tr: 'Canlı: LOS40 İspanya (Madrid - Popüler Hit Müzik)' }
             },
-            'cowboy-era': {
-                id: 'cowboy-era',
-                name: { en: 'Wild West Saloon', tr: 'Kovboy & Saloon' },
-                url: 'https://ice1.somafm.com/bootliquor-128-mp3',
-                credit: { en: 'Live: SomaFM Boot Liquor (Americana & Saloon)', tr: 'Canlı: SomaFM Boot Liquor (Americana & Saloon)' }
+            'trt-radyo-3': {
+                id: 'trt-radyo-3',
+                name: { en: 'TRT Radyo 3', tr: 'TRT Radyo 3' },
+                url: 'https://radio-trtradyo3.live.trt.com.tr/master.m3u8',
+                credit: { en: 'Live: TRT Radyo 3 (Turkey - Classical, Jazz & World Music)', tr: 'Canlı: TRT Radyo 3 (Türkiye - Klasik, Caz & Dünya Müziği)' }
             },
-            'cyber-world': {
-                id: 'cyber-world',
-                name: { en: 'Cyber & Synthwave', tr: 'Siber & Synthwave' },
-                url: 'https://radio.plaza.one/mp3',
-                credit: { en: 'Live: Nightwave Plaza (Vaporwave & Synth)', tr: 'Canlı: Nightwave Plaza (Vaporwave & Synth)' }
+            'bbc-world': {
+                id: 'bbc-world',
+                name: { en: 'BBC World Service', tr: 'BBC World Service' },
+                url: 'https://stream.live.vc.bbcmedia.co.uk/bbc_world_service',
+                credit: { en: 'Live: BBC World Service (London - News & Culture)', tr: 'Canlı: BBC World Service (Londra - Haber & Kültür)' }
             },
-            'dark-fantasy': {
-                id: 'dark-fantasy',
-                name: { en: 'Dark Fantasy & Ambient', tr: 'Karanlık Fantezi & Ambiyans' },
-                url: 'https://ice1.somafm.com/dronezone-128-mp3',
-                credit: { en: 'Live: SomaFM Drone Zone (Dark Ambient)', tr: 'Canlı: SomaFM Drone Zone (Dark Ambient)' }
+            'kexp': {
+                id: 'kexp',
+                name: { en: 'KEXP 90.3 FM', tr: 'KEXP 90.3 FM' },
+                url: 'https://kexp.streamguys1.com/kexp128.mp3',
+                credit: { en: 'Live: KEXP 90.3 FM (Seattle - Indie & Alternative)', tr: 'Canlı: KEXP 90.3 FM (Seattle - Bağımsız & Alternatif)' }
             },
-            'light-fantasy': {
-                id: 'light-fantasy',
-                name: { en: 'Light Fantasy & Celtic', tr: 'Aydınlık Fantezi & Keltik' },
-                url: 'https://ice1.somafm.com/thistle-128-mp3',
-                credit: { en: 'Live: SomaFM Thistle Radio (Celtic & Fantasy)', tr: 'Canlı: SomaFM Thistle Radio (Keltik & Fantezi)' }
+            'radio-paradise': {
+                id: 'radio-paradise',
+                name: { en: 'Radio Paradise', tr: 'Radio Paradise' },
+                url: 'https://stream.radioparadise.com/mp3-128',
+                credit: { en: 'Live: Radio Paradise (California - Eclectic Rock & Chill)', tr: 'Canlı: Radio Paradise (Kaliforniya - Eklektik Rock & Akustik)' }
             },
-            'jazz-romance': {
-                id: 'jazz-romance',
-                name: { en: 'Jazz Romance & Cafe', tr: 'Caz & Romantizm' },
-                url: 'https://ice1.somafm.com/sonicuniverse-128-mp3',
-                credit: { en: 'Live: SomaFM Sonic Universe (Nu-Jazz & Romance)', tr: 'Canlı: SomaFM Sonic Universe (Nu-Jazz & Romantizm)' }
+            'fip-paris': {
+                id: 'fip-paris',
+                name: { en: 'FIP Paris', tr: 'FIP Paris' },
+                url: 'https://icecast.radiofrance.fr/fip-midfi.mp3',
+                credit: { en: 'Live: FIP Radio France (Paris - Eclectic, Jazz & Groove)', tr: 'Canlı: FIP Radio France (Paris - Eklektik, Caz & Groove)' }
             },
-            'rock-n-roll': {
-                id: 'rock-n-roll',
-                name: { en: "Rock 'n' Roll & Classic", tr: "Rock 'n' Roll & Klasik" },
-                url: 'https://ice1.somafm.com/seventies-128-mp3',
-                credit: { en: 'Live: SomaFM Left Coast 70s (Classic Rock)', tr: 'Canlı: SomaFM Left Coast 70s (Klasik Rock)' }
+            'nts-radio': {
+                id: 'nts-radio',
+                name: { en: 'NTS Radio', tr: 'NTS Radio' },
+                url: 'https://stream-relay-geo.ntslive.net/stream',
+                credit: { en: 'Live: NTS Radio 1 (London - Underground & Global Beats)', tr: 'Canlı: NTS Radio 1 (Londra - Global Ritimler & Beatler)' }
             },
-            'the-pasific-crest': {
-                id: 'the-pasific-crest',
-                name: { en: "Welcome to Oregon", tr: "Oregon'a Hoşgeldiniz" },
-                url: 'https://ice1.somafm.com/secretagent-128-mp3',
-                credit: { en: 'Live: SomaFM Secret Agent (Mystery)', tr: 'Canlı: SomaFM Secret Agent (Gizem)' }
+            'classic-fm': {
+                id: 'classic-fm',
+                name: { en: 'Classic FM', tr: 'Classic FM' },
+                url: 'https://media-ssl.musicradio.com/ClassicFM',
+                credit: { en: 'Live: Classic FM (London - The World\'s Greatest Music)', tr: 'Canlı: Classic FM (Londra - Dünyanın En Sevilen Klasik Müzikleri)' }
             },
-            'milky-way': {
-                id: 'milky-way',
-                name: { en: "Kawaii Space", tr: "Tatlış Uzay" },
-                url: 'https://ice1.somafm.com/missioncontrol-128-mp3',
-                credit: { en: 'Live: SomaFM Mission Control (Space)', tr: 'Canlı: SomaFM Mission Control (Uzay)' }
+            'power-fm': {
+                id: 'power-fm',
+                name: { en: 'Power FM', tr: 'Power FM' },
+                url: 'https://listen.powerapp.com.tr/powerfm/mpeg/icecast.audio',
+                credit: { en: 'Live: Power FM (Istanbul - Top 40 & Global Hits)', tr: 'Canlı: Power FM (İstanbul - Hit Müzik & Listeler)' }
             }
         };
         // Canlı radyo istasyonlarının anahtar dizisi
-        this.radioKeys = ['los40', 'cowboy-era', 'cyber-world', 'dark-fantasy', 'light-fantasy', 'jazz-romance', 'rock-n-roll', 'the-pasific-crest', 'milky-way'];
+        this.radioKeys = ['los40', 'trt-radyo-3', 'bbc-world', 'kexp', 'radio-paradise', 'fip-paris', 'nts-radio', 'classic-fm', 'power-fm'];
         // Geriye dönük uyumluluk takma adları (backward compatibility aliases)
-        this.radioStations['lofi'] = this.radioStations['cowboy-era'];
-        this.radioStations['synthwave'] = this.radioStations['cyber-world'];
-        this.radioStations['space'] = this.radioStations['dark-fantasy'];
-        this.radioStations['piano-chill'] = this.radioStations['light-fantasy'];
-        this.radioStations['jazz-cafe'] = this.radioStations['jazz-romance'];
-        this.radioStations['welcome-to-oregon'] = this.radioStations['the-pasific-crest'];
-        this.radioStations['kawaii-space'] = this.radioStations['milky-way'];
+        this.radioStations['cowboy-era'] = this.radioStations['kexp'];
+        this.radioStations['cyber-world'] = this.radioStations['nts-radio'];
+        this.radioStations['dark-fantasy'] = this.radioStations['radio-paradise'];
+        this.radioStations['light-fantasy'] = this.radioStations['fip-paris'];
+        this.radioStations['jazz-romance'] = this.radioStations['trt-radyo-3'];
+        this.radioStations['rock-n-roll'] = this.radioStations['power-fm'];
+        this.radioStations['the-pasific-crest'] = this.radioStations['classic-fm'];
+        this.radioStations['milky-way'] = this.radioStations['bbc-world'];
+        this.radioStations['lofi'] = this.radioStations['kexp'];
+        this.radioStations['synthwave'] = this.radioStations['nts-radio'];
+        this.radioStations['space'] = this.radioStations['radio-paradise'];
+        this.radioStations['piano-chill'] = this.radioStations['fip-paris'];
+        this.radioStations['jazz-cafe'] = this.radioStations['trt-radyo-3'];
+        this.radioStations['welcome-to-oregon'] = this.radioStations['classic-fm'];
+        this.radioStations['kawaii-space'] = this.radioStations['bbc-world'];
         this.currentRadioIndex = 0;
+        this.currentHls = null;
 
         this.previewAudio = null;
         this.previewTheme = null;
@@ -2353,6 +2374,10 @@ class AudioManager {
         if (!freq) return;
 
         // Stream, çalma listesi ve lobi çalarını durdur
+        if (this.currentHls) {
+            try { this.currentHls.destroy(); } catch (e) {}
+            this.currentHls = null;
+        }
         if (this.streamPlayer && !this.streamPlayer.paused) {
             this.streamPlayer.pause();
             this.streamPlayer.onerror = null;
@@ -2406,6 +2431,12 @@ class AudioManager {
             this.uiPlayerTrackCredit.innerText = `${t.radioConnecting || 'Connecting...'} (${stationTitle})`;
         }
 
+        // Varsa önceki HLS örneğini temizle
+        if (this.currentHls) {
+            try { this.currentHls.destroy(); } catch (e) {}
+            this.currentHls = null;
+        }
+
         this.streamPlayer.onerror = () => {
             console.warn(`[Atmosphere] Radio stream failed for ${stationId}`);
             if (this.uiPlayerTrackCredit) {
@@ -2413,14 +2444,37 @@ class AudioManager {
             }
         };
 
-        this.streamPlayer.src = station.url;
-        this.streamPlayer.load();
-        this.streamPlayer.play()
-            .then(() => this.updateMusicPlayerUI())
-            .catch(err => {
-                console.log("Radio stream play error:", err);
-                this.updateMusicPlayerUI();
+        const isHls = station.url.includes('.m3u8');
+        if (isHls && !this.streamPlayer.canPlayType('application/vnd.apple.mpegurl') && window.Hls && Hls.isSupported()) {
+            this.currentHls = new Hls({ enableWorker: false });
+            this.currentHls.loadSource(station.url);
+            this.currentHls.attachMedia(this.streamPlayer);
+            this.currentHls.on(Hls.Events.MANIFEST_PARSED, () => {
+                this.streamPlayer.play()
+                    .then(() => this.updateMusicPlayerUI())
+                    .catch(err => {
+                        console.log("Radio HLS play error:", err);
+                        this.updateMusicPlayerUI();
+                    });
             });
+            this.currentHls.on(Hls.Events.ERROR, (event, data) => {
+                if (data && data.fatal) {
+                    console.warn('[Atmosphere] HLS fatal error:', data);
+                    if (this.uiPlayerTrackCredit) {
+                        this.uiPlayerTrackCredit.innerText = `${t.radioErrorFallback || 'Stream unavailable'}`;
+                    }
+                }
+            });
+        } else {
+            this.streamPlayer.src = station.url;
+            this.streamPlayer.load();
+            this.streamPlayer.play()
+                .then(() => this.updateMusicPlayerUI())
+                .catch(err => {
+                    console.log("Radio stream play error:", err);
+                    this.updateMusicPlayerUI();
+                });
+        }
     }
 
     togglePlayerPlayPause() {
@@ -2450,7 +2504,7 @@ class AudioManager {
         } else if (this.playerMode === 'radio') {
             if (!this.streamPlayer) return;
             if (!this.streamPlayer.src || !this.currentRadioStation) {
-                this.playRadio('cowboy-era');
+                this.playRadio('los40');
                 return;
             }
             if (this.streamPlayer.paused) {
