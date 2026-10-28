@@ -72,18 +72,19 @@ const translations = {
         bldOregon: "Welcome to Oregon", bldKawaii: "Kawaii Space",
         
         radioLos40: "LOS40",
-        radioTrtRadyo3: "TRT Radyo 3",
-        radioBbcWorld: "BBC World Service",
+        radioRadioX: "Radio X (Indie Rock)",
+        radioCapitalFm: "Capital FM",
+        radioAsiaDream: "Asia DREAM Radio",
         radioKexp: "KEXP 90.3 FM",
         radioRadioParadise: "Radio Paradise",
         radioFipParis: "FIP Paris",
-        radioNtsRadio: "NTS Radio",
-        radioClassicFm: "Classic FM",
         radioPowerFm: "Power FM",
-        radioCowboy: "KEXP 90.3 FM", radioCyber: "NTS Radio", radioDark: "Radio Paradise",
-        radioLight: "FIP Paris", radioJazz: "TRT Radyo 3", radioRock: "Power FM",
-        radioOregon: "Classic FM", radioKawaii: "BBC World Service",
-        radioLofi: "KEXP 90.3 FM", radioSynth: "NTS Radio", radioSpace: "Radio Paradise", radioPiano: "FIP Paris",
+        radioClassicFm: "Classic FM",
+        radioTrtRadyo3: "Radio X (Indie Rock)", radioBbcWorld: "Radio X (Indie Rock)", radioNtsRadio: "Asia DREAM Radio",
+        radioCowboy: "Radio X (Indie Rock)", radioCyber: "Capital FM", radioDark: "Radio Paradise",
+        radioLight: "FIP Paris", radioJazz: "Classic FM", radioRock: "Radio X (Indie Rock)",
+        radioOregon: "Classic FM", radioKawaii: "Asia DREAM Radio",
+        radioLofi: "Radio X (Indie Rock)", radioSynth: "Capital FM", radioSpace: "Radio Paradise", radioPiano: "FIP Paris",
         radioConnecting: "Connecting to station...", radioErrorFallback: "Stream unavailable",
         
         mapSubtitle: "CHOOSE YOUR VIBE", mapExplore: "EXPLORE", hudEnter: "Enter", hudTapEnter: "Tap to Enter",
@@ -145,18 +146,19 @@ const translations = {
         bldOregon: "Oregon'a Hoşgeldiniz", bldKawaii: "Tatlış Uzay",
         
         radioLos40: "LOS40",
-        radioTrtRadyo3: "TRT Radyo 3",
-        radioBbcWorld: "BBC World Service",
+        radioRadioX: "Radio X (Indie Rock)",
+        radioCapitalFm: "Capital FM",
+        radioAsiaDream: "Asia DREAM Radio",
         radioKexp: "KEXP 90.3 FM",
         radioRadioParadise: "Radio Paradise",
         radioFipParis: "FIP Paris",
-        radioNtsRadio: "NTS Radio",
-        radioClassicFm: "Classic FM",
         radioPowerFm: "Power FM",
-        radioCowboy: "KEXP 90.3 FM", radioCyber: "NTS Radio", radioDark: "Radio Paradise",
-        radioLight: "FIP Paris", radioJazz: "TRT Radyo 3", radioRock: "Power FM",
-        radioOregon: "Classic FM", radioKawaii: "BBC World Service",
-        radioLofi: "KEXP 90.3 FM", radioSynth: "NTS Radio", radioSpace: "Radio Paradise", radioPiano: "FIP Paris",
+        radioClassicFm: "Classic FM",
+        radioTrtRadyo3: "Radio X (Indie Rock)", radioBbcWorld: "Radio X (Indie Rock)", radioNtsRadio: "Asia DREAM Radio",
+        radioCowboy: "Radio X (Indie Rock)", radioCyber: "Capital FM", radioDark: "Radio Paradise",
+        radioLight: "FIP Paris", radioJazz: "Classic FM", radioRock: "Radio X (Indie Rock)",
+        radioOregon: "Classic FM", radioKawaii: "Asia DREAM Radio",
+        radioLofi: "Radio X (Indie Rock)", radioSynth: "Capital FM", radioSpace: "Radio Paradise", radioPiano: "FIP Paris",
         radioConnecting: "İstasyona bağlanıyor...", radioErrorFallback: "Yayın açılamadı",
 
         mapSubtitle: "MEKANINI SEÇ", mapExplore: "KEŞFET", hudEnter: "Giriş Yap", hudTapEnter: "Giriş İçin Dokun",
@@ -271,14 +273,14 @@ function applyTranslations() {
     const lKaw = document.querySelector('.lobby-txt-kawaii'); if (lKaw) lKaw.innerText = t.bldKawaii;
 
     const rLos = document.querySelector('.radio-txt-los40'); if (rLos) rLos.innerText = t.radioLos40 || 'LOS40';
-    const rTrt = document.querySelector('.radio-txt-trt-radyo-3'); if (rTrt) rTrt.innerText = t.radioTrtRadyo3 || 'TRT Radyo 3';
-    const rBbc = document.querySelector('.radio-txt-bbc-world'); if (rBbc) rBbc.innerText = t.radioBbcWorld || 'BBC World Service';
+    const rRadX = document.querySelector('.radio-txt-radio-x'); if (rRadX) rRadX.innerText = t.radioRadioX || 'Radio X (Indie Rock)';
+    const rCap = document.querySelector('.radio-txt-capital-fm'); if (rCap) rCap.innerText = t.radioCapitalFm || 'Capital FM';
+    const rAsia = document.querySelector('.radio-txt-asia-dream'); if (rAsia) rAsia.innerText = t.radioAsiaDream || 'Asia DREAM Radio';
     const rKex = document.querySelector('.radio-txt-kexp'); if (rKex) rKex.innerText = t.radioKexp || 'KEXP 90.3 FM';
     const rPar = document.querySelector('.radio-txt-radio-paradise'); if (rPar) rPar.innerText = t.radioRadioParadise || 'Radio Paradise';
     const rFip = document.querySelector('.radio-txt-fip-paris'); if (rFip) rFip.innerText = t.radioFipParis || 'FIP Paris';
-    const rNts = document.querySelector('.radio-txt-nts-radio'); if (rNts) rNts.innerText = t.radioNtsRadio || 'NTS Radio';
-    const rCls = document.querySelector('.radio-txt-classic-fm'); if (rCls) rCls.innerText = t.radioClassicFm || 'Classic FM';
     const rPow = document.querySelector('.radio-txt-power-fm'); if (rPow) rPow.innerText = t.radioPowerFm || 'Power FM';
+    const rCls = document.querySelector('.radio-txt-classic-fm'); if (rCls) rCls.innerText = t.radioClassicFm || 'Classic FM';
 
     const txtLoadVis = document.querySelector('.txt-load-visual'); if (txtLoadVis) txtLoadVis.innerText = t.loadVisual;
     const txtMyM = document.querySelector('.txt-my-music'); if (txtMyM) txtMyM.innerText = t.myMusic;
@@ -1571,7 +1573,7 @@ class AudioManager {
         this.freqKeys = Object.keys(this.frequencies);
         this.currentFreqIndex = 0;
 
-        // Canlı Radyo İstasyonları (Dünyanın Dört Bir Yanından Popüler İstasyonlar + LOS40 + TRT Radyo 3)
+        // Canlı Radyo İstasyonları (Dünyanın Dört Bir Yanından Popüler İstasyonlar: LOS40, Radio X, Capital FM, Asia DREAM, vb.)
         this.radioStations = {
             'los40': {
                 id: 'los40',
@@ -1579,23 +1581,29 @@ class AudioManager {
                 url: 'https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40.mp3',
                 credit: { en: 'Live: LOS40 España (Madrid - Pop & Hits)', tr: 'Canlı: LOS40 İspanya (Madrid - Popüler Hit Müzik)' }
             },
-            'trt-radyo-3': {
-                id: 'trt-radyo-3',
-                name: { en: 'TRT Radyo 3', tr: 'TRT Radyo 3' },
-                url: 'https://radio-trtradyo3.live.trt.com.tr/master.m3u8',
-                credit: { en: 'Live: TRT Radyo 3 (Turkey - Classical, Jazz & World Music)', tr: 'Canlı: TRT Radyo 3 (Türkiye - Klasik, Caz & Dünya Müziği)' }
+            'radio-x': {
+                id: 'radio-x',
+                name: { en: 'Radio X (Indie Rock)', tr: 'Radio X (Indie Rock)' },
+                url: 'https://media-ssl.musicradio.com/RadioXUK',
+                credit: { en: 'Live: Radio X UK (London - Muse, Radiohead, The Cure, Arctic Monkeys)', tr: 'Canlı: Radio X UK (Londra - Muse, Radiohead, The Cure, Arctic Monkeys)' }
             },
-            'bbc-world': {
-                id: 'bbc-world',
-                name: { en: 'BBC World Service', tr: 'BBC World Service' },
-                url: 'https://stream.live.vc.bbcmedia.co.uk/bbc_world_service',
-                credit: { en: 'Live: BBC World Service (London - News & Culture)', tr: 'Canlı: BBC World Service (Londra - Haber & Kültür)' }
+            'capital-fm': {
+                id: 'capital-fm',
+                name: { en: 'Capital FM', tr: 'Capital FM' },
+                url: 'https://media-ssl.musicradio.com/CapitalUK',
+                credit: { en: 'Live: Capital FM (London - The UK\'s No. 1 Hit Music Station)', tr: 'Canlı: Capital FM (Londra - Birleşik Krallık 1 Numaralı Hit Müzik)' }
+            },
+            'asia-dream': {
+                id: 'asia-dream',
+                name: { en: 'Asia DREAM Radio', tr: 'Asia DREAM Radio' },
+                url: 'https://quincy.torontocast.com:2020/stream.mp3',
+                credit: { en: 'Live: Asia DREAM Radio (Tokyo - J-Pop, City Pop & Asian Hits)', tr: 'Canlı: Asia DREAM Radio (Tokyo - J-Pop, City Pop & Asya Hitleri)' }
             },
             'kexp': {
                 id: 'kexp',
                 name: { en: 'KEXP 90.3 FM', tr: 'KEXP 90.3 FM' },
                 url: 'https://kexp.streamguys1.com/kexp128.mp3',
-                credit: { en: 'Live: KEXP 90.3 FM (Seattle - Indie & Alternative)', tr: 'Canlı: KEXP 90.3 FM (Seattle - Bağımsız & Alternatif)' }
+                credit: { en: 'Live: KEXP 90.3 FM (Seattle - Where the Music Matters)', tr: 'Canlı: KEXP 90.3 FM (Seattle - Bağımsız & Alternatif)' }
             },
             'radio-paradise': {
                 id: 'radio-paradise',
@@ -1609,43 +1617,40 @@ class AudioManager {
                 url: 'https://icecast.radiofrance.fr/fip-midfi.mp3',
                 credit: { en: 'Live: FIP Radio France (Paris - Eclectic, Jazz & Groove)', tr: 'Canlı: FIP Radio France (Paris - Eklektik, Caz & Groove)' }
             },
-            'nts-radio': {
-                id: 'nts-radio',
-                name: { en: 'NTS Radio', tr: 'NTS Radio' },
-                url: 'https://stream-relay-geo.ntslive.net/stream',
-                credit: { en: 'Live: NTS Radio 1 (London - Underground & Global Beats)', tr: 'Canlı: NTS Radio 1 (Londra - Global Ritimler & Beatler)' }
+            'power-fm': {
+                id: 'power-fm',
+                name: { en: 'Power FM', tr: 'Power FM' },
+                url: 'https://listen.powerapp.com.tr/powerfm/mpeg/icecast.audio',
+                credit: { en: 'Live: Power FM (Istanbul - Top 40 & Global Hits)', tr: 'Canlı: Power FM (İstanbul - Hit Müzik & Listeler)' }
             },
             'classic-fm': {
                 id: 'classic-fm',
                 name: { en: 'Classic FM', tr: 'Classic FM' },
                 url: 'https://media-ssl.musicradio.com/ClassicFM',
                 credit: { en: 'Live: Classic FM (London - The World\'s Greatest Music)', tr: 'Canlı: Classic FM (Londra - Dünyanın En Sevilen Klasik Müzikleri)' }
-            },
-            'power-fm': {
-                id: 'power-fm',
-                name: { en: 'Power FM', tr: 'Power FM' },
-                url: 'https://listen.powerapp.com.tr/powerfm/mpeg/icecast.audio',
-                credit: { en: 'Live: Power FM (Istanbul - Top 40 & Global Hits)', tr: 'Canlı: Power FM (İstanbul - Hit Müzik & Listeler)' }
             }
         };
         // Canlı radyo istasyonlarının anahtar dizisi
-        this.radioKeys = ['los40', 'trt-radyo-3', 'bbc-world', 'kexp', 'radio-paradise', 'fip-paris', 'nts-radio', 'classic-fm', 'power-fm'];
+        this.radioKeys = ['los40', 'radio-x', 'capital-fm', 'asia-dream', 'kexp', 'radio-paradise', 'fip-paris', 'power-fm', 'classic-fm'];
         // Geriye dönük uyumluluk takma adları (backward compatibility aliases)
-        this.radioStations['cowboy-era'] = this.radioStations['kexp'];
-        this.radioStations['cyber-world'] = this.radioStations['nts-radio'];
+        this.radioStations['trt-radyo-3'] = this.radioStations['radio-x'];
+        this.radioStations['bbc-world'] = this.radioStations['radio-x'];
+        this.radioStations['nts-radio'] = this.radioStations['asia-dream'];
+        this.radioStations['cowboy-era'] = this.radioStations['radio-x'];
+        this.radioStations['cyber-world'] = this.radioStations['capital-fm'];
         this.radioStations['dark-fantasy'] = this.radioStations['radio-paradise'];
         this.radioStations['light-fantasy'] = this.radioStations['fip-paris'];
-        this.radioStations['jazz-romance'] = this.radioStations['trt-radyo-3'];
-        this.radioStations['rock-n-roll'] = this.radioStations['power-fm'];
+        this.radioStations['jazz-romance'] = this.radioStations['classic-fm'];
+        this.radioStations['rock-n-roll'] = this.radioStations['radio-x'];
         this.radioStations['the-pasific-crest'] = this.radioStations['classic-fm'];
-        this.radioStations['milky-way'] = this.radioStations['bbc-world'];
-        this.radioStations['lofi'] = this.radioStations['kexp'];
-        this.radioStations['synthwave'] = this.radioStations['nts-radio'];
+        this.radioStations['milky-way'] = this.radioStations['asia-dream'];
+        this.radioStations['lofi'] = this.radioStations['radio-x'];
+        this.radioStations['synthwave'] = this.radioStations['capital-fm'];
         this.radioStations['space'] = this.radioStations['radio-paradise'];
         this.radioStations['piano-chill'] = this.radioStations['fip-paris'];
-        this.radioStations['jazz-cafe'] = this.radioStations['trt-radyo-3'];
+        this.radioStations['jazz-cafe'] = this.radioStations['classic-fm'];
         this.radioStations['welcome-to-oregon'] = this.radioStations['classic-fm'];
-        this.radioStations['kawaii-space'] = this.radioStations['bbc-world'];
+        this.radioStations['kawaii-space'] = this.radioStations['asia-dream'];
         this.currentRadioIndex = 0;
         this.currentHls = null;
 
