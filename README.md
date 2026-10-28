@@ -28,15 +28,15 @@ The project operates across two main experiences:
   * **Page 2 (Interactive Campus Map)**: Animated isometric map allowing users to explore different themed locations with interactive previews.
   * **Page 3 (Themed Atmosphere Rooms)**: Immersive rooms featuring high-definition visual animations, dedicated lo-fi music playlists, and an ambient sound mixer.
 
-* **8 Unique Themed Rooms**:
-  * Milky Way
-  * Cyber World
-  * Cowboy Era
-  * Jazz Romance
-  * Light Fantasy
-  * Dark Fantasy
-  * Rock 'n' Roll
-  * The Pacific Crest
+* **8 Unique Themes and House Names**:
+  * Milky Way (Kawaii Space)
+  * Cyber World (Cyberpunk Skyscraper)
+  * Cowboy Era (Wild West Saloon)
+  * Jazz Romance (New York Velvet Jazz)
+  * Light Fantasy (Dragon's Sanctuary)
+  * Dark Fantasy (Cursed Cathedral)
+  * Rock 'n' Roll (Children of Democracy Motor Club)
+  * The Pacific Crest (Welcome to Oregon)
 
 * **Audio & Soundscape Engine**:
   * Multi-track lo-fi playlists curated for each theme with shuffle, loop, and playback controls.
@@ -93,15 +93,15 @@ Proje iki ana mecrada çalışır:
   * **2. Sayfa (İnteraktif Harita)**: Bina önizlemeleri ve lobi sesleriyle zenginleştirilmiş animasyonlu izometrik yerleşke haritası.
   * **3. Sayfa (Tematik Odalar)**: Her biri kendine has video animasyonlarına, lo-fi çalma listelerine ve ambiyans ses mikserine sahip 8 özel oda.
 
-* **8 Farklı Tematik Oda**:
-  * Milky Way (Samanyolu)
-  * Cyber World (Siber Dünya)
-  * Cowboy Era (Vahşi Batı)
-  * Jazz Romance (Caz & Romantizm)
-  * Light Fantasy (Aydınlık Fantastik)
-  * Dark Fantasy (Karanlık Fantastik)
-  * Rock 'n' Roll
-  * The Pacific Crest (Pasifik Zirvesi)
+* **8 Farklı Tema ve Bina İsimleri**:
+  * Milky Way (Kawaii Space)
+  * Cyber World (Cyberpunk Skyscraper)
+  * Cowboy Era (Wild West Saloon)
+  * Jazz Romance (New York Velvet Jazz)
+  * Light Fantasy (Dragon's Sanctuary)
+  * Dark Fantasy (Cursed Cathedral)
+  * Rock 'n' Roll (Children of Democracy Motor Club)
+  * The Pacific Crest (Welcome to Oregon)
 
 * **Ses ve Ambiyans Mikseri**:
   * Her tema için özel derlenmiş 12'şer parçalık lo-fi müzik kütüphanesi.
