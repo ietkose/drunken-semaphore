@@ -1548,10 +1548,11 @@ class AudioManager {
         this.musicPath = "assets/audios/music-for-themes/"; 
         this.currentPlaylistTheme = 'cyber-world';
         this.totalPlaylistTracks = 12;
-        this.isPlaylistReverse = Math.random() > 0.5;
-        this.currentPlaylistTrackIndex = this.isPlaylistReverse ? this.totalPlaylistTracks : 1;
+        this.isPlaylistReverse = false;
+        this.currentPlaylistTrackIndex = 1;
         this.isPlaylistShuffle = false;
         this.hasPlaylistStarted = false;
+        this.playlistHistory = [];
 
         // 3. Müzik & Stream Çaları (Canlı Radyolar)
         this.streamPlayer = document.getElementById('radio-player');
@@ -2068,7 +2069,8 @@ class AudioManager {
 
     setPlaylistTheme(themeName) {
         this.currentPlaylistTheme = normalizeTheme(themeName);
-        this.currentPlaylistTrackIndex = this.isPlaylistReverse ? this.totalPlaylistTracks : 1;
+        this.currentPlaylistTrackIndex = 1;
+        this.playlistHistory = [];
         this.updatePlaylistUI();
     }
 
@@ -2140,6 +2142,12 @@ class AudioManager {
     }
 
     playNextPlaylistTrack() {
+        if (this.currentPlaylistTrackIndex) {
+            if (!this.playlistHistory) this.playlistHistory = [];
+            this.playlistHistory.push(this.currentPlaylistTrackIndex);
+            if (this.playlistHistory.length > 50) this.playlistHistory.shift();
+        }
+
         if (this.isPlaylistShuffle) {
             let nextIndex = this.currentPlaylistTrackIndex;
             if (this.totalPlaylistTracks > 1) {
@@ -2148,31 +2156,26 @@ class AudioManager {
                 }
             }
             this.currentPlaylistTrackIndex = nextIndex;
-        } else if (this.isPlaylistReverse) {
-            this.currentPlaylistTrackIndex--;
-            if (this.currentPlaylistTrackIndex < 1) this.currentPlaylistTrackIndex = this.totalPlaylistTracks;
         } else {
             this.currentPlaylistTrackIndex++;
-            if (this.currentPlaylistTrackIndex > this.totalPlaylistTracks) this.currentPlaylistTrackIndex = 1;
+            if (this.currentPlaylistTrackIndex > this.totalPlaylistTracks) {
+                this.currentPlaylistTrackIndex = 1;
+            }
         }
         this.playPlaylistTrack(this.currentPlaylistTheme, this.currentPlaylistTrackIndex);
     }
 
     playPrevPlaylistTrack() {
-        if (this.isPlaylistShuffle) {
-            let prevIndex = this.currentPlaylistTrackIndex;
-            if (this.totalPlaylistTracks > 1) {
-                while (prevIndex === this.currentPlaylistTrackIndex) {
-                    prevIndex = Math.floor(Math.random() * this.totalPlaylistTracks) + 1;
-                }
-            }
+        if (this.playlistHistory && this.playlistHistory.length > 0) {
+            // Gerçekten daha önce dinlenen parçayı geçmişten alıp çal
+            const prevIndex = this.playlistHistory.pop();
             this.currentPlaylistTrackIndex = prevIndex;
-        } else if (this.isPlaylistReverse) {
-            this.currentPlaylistTrackIndex++;
-            if (this.currentPlaylistTrackIndex > this.totalPlaylistTracks) this.currentPlaylistTrackIndex = 1;
         } else {
+            // Geçmiş henüz boşsa sıralı bir önceki parçaya geç
             this.currentPlaylistTrackIndex--;
-            if (this.currentPlaylistTrackIndex < 1) this.currentPlaylistTrackIndex = this.totalPlaylistTracks;
+            if (this.currentPlaylistTrackIndex < 1) {
+                this.currentPlaylistTrackIndex = this.totalPlaylistTracks;
+            }
         }
         this.playPlaylistTrack(this.currentPlaylistTheme, this.currentPlaylistTrackIndex);
     }
