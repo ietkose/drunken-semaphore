@@ -10,9 +10,9 @@
 
 ---
 
-## English
+## 🇬🇧 ENGLISH
 
-### About the Project
+### 🥨 About the Project
 Drunken Semaphore is an immersive, aesthetic productivity and relaxation console designed for studying, reading, coding, or simply unwinding. It brings dynamic visual atmospheres, curated multi-track lo-fi playlists, realistic environmental soundscapes, and comprehensive time management utilities together into a single cohesive interface.
 
 The project operates across two main experiences:
@@ -21,7 +21,7 @@ The project operates across two main experiences:
 
 ---
 
-### Key Features
+### 🥨 Key Features
 
 * **Three-Tier Architecture**:
   * **Page 1 (Focus Console / New Tab)**: Minimalist dashboard with digital clock, date, rotating 4K wallpapers, quick launch shortcuts (Spotify, Google, YouTube, Notion, GitHub, etc.), and fullscreen mode.
@@ -51,7 +51,7 @@ The project operates across two main experiences:
 
 ---
 
-### Tech Stack
+### 🥨 Tech Stack
 * **Vanilla JavaScript (ES6+)**: Custom modular state management, audio synthesis, audio mixing engine, and screen routing without framework overhead.
 * **HTML5 & CSS3**: Responsive UI, CSS animations, cyberpunk neon lighting, and high-performance backdrop-filter glassmorphism.
 * **Web Audio API & HTML5 Audio**: Multi-channel concurrent audio playback with volume ducking and seamless looping.
@@ -60,7 +60,7 @@ The project operates across two main experiences:
 
 ---
 
-### Local Setup
+### 🥨 Local Setup
 
 ```bash
 # Clone the repository
@@ -75,9 +75,9 @@ npx serve .
 
 ---
 
-## Türkçe
+## 
 
-### Proje Hakkında
+### 🥨 Proje Hakkında
 Drunken Semaphore; ders çalışırken, kitap okurken, kod yazarken veya dinlenirken arka planda yaşayan bir evren kurmak isteyenler için geliştirilmiş cyberpunk ve lo-fi temalı atmosfer konsoludur. Dinamik görsel atmosferleri, özenle derlenmiş çok parçalı müzik listelerini, gerçekçi çevre seslerini ve zaman yönetim araçlarını tek bir arayüzde birleştirir.
 
 Proje iki ana mecrada çalışır:
@@ -86,7 +86,7 @@ Proje iki ana mecrada çalışır:
 
 ---
 
-### Öne Çıkan Özellikler
+### 🥨 Öne Çıkan Özellikler
 
 * **Üç Katmanlı Mimari**:
   * **1. Sayfa (Odak Konsolu / Yeni Sekme)**: Büyük dijital saat, tarih, dönüşümlü 4K duvar kağıtları, hızlı erişim kartları (Spotify, Google, YouTube, Notion, GitHub vb.) ve tam ekran modu.
@@ -116,7 +116,7 @@ Proje iki ana mecrada çalışır:
 
 ---
 
-### Kullanılan Teknolojiler
+### 🥨 Kullanılan Teknolojiler
 * **Saf JavaScript (ES6+)**: Dış framework bağımlılığı olmaksızın modüler durum yönetimi, ses yönlendirme ve arayüz mantığı.
 * **HTML5 & CSS3**: Esnek (responsive) yerleşim, cam efekti (glassmorphism), neon ışıklandırmalar ve akıcı animasyonlar.
 * **Web Audio API**: Çok kanallı eşzamanlı ses çalma, ses seviyesi dengeleme ve döngü yönetimi.
@@ -125,6 +125,14 @@ Proje iki ana mecrada çalışır:
 
 ---
 
-### Canlı Bağlantılar
+### 🥨 Canlı Bağlantılar
 * Web Konsolu: [https://drunken-semaphore.web.app](https://drunken-semaphore.web.app)
 * Gizlilik Politikası: [https://drunken-semaphore.web.app/privacy.html](https://drunken-semaphore.web.app/privacy.html)
+
+---
+
+<img width="1919" height="861" alt="Ekran görüntüsü 2026-10-28 151219" src="https://github.com/user-attachments/assets/5dbc3bda-7818-4126-9dee-4342d4d26f1e" />
+
+<img width="1919" height="864" alt="Ekran görüntüsü 2026-10-28 151234" src="https://github.com/user-attachments/assets/39d2e422-54c1-404c-b0dd-adaaeb084f82" />
+
+<img width="1919" height="859" alt="Ekran görüntüsü 2026-10-28 151250" src="https://github.com/user-attachments/assets/8991ae9e-3aee-4c7c-be1c-5e3654b4ac02" />
