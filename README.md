@@ -8,7 +8,7 @@
 [![Firebase](https://img.shields.io/badge/Firebase_Hosting-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
 [![Web Audio API](https://img.shields.io/badge/Web_Audio_API-000000?style=for-the-badge&logo=soundCloud&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API)
 
----
+═════════════════════════════════════════════════════════════════════════════════════════
 
 ## 🇬🇧 ENGLISH
 
@@ -73,9 +73,9 @@ cd atmosphere-os
 npx serve .
 ```
 
----
+═════════════════════════════════════════════════════════════════════════════════════════
 
-## 
+ ## 🇹🇷 TÜRKÇE
 
 ### 🥨 Proje Hakkında
 Drunken Semaphore; ders çalışırken, kitap okurken, kod yazarken veya dinlenirken arka planda yaşayan bir evren kurmak isteyenler için geliştirilmiş cyberpunk ve lo-fi temalı atmosfer konsoludur. Dinamik görsel atmosferleri, özenle derlenmiş çok parçalı müzik listelerini, gerçekçi çevre seslerini ve zaman yönetim araçlarını tek bir arayüzde birleştirir.
@@ -129,7 +129,9 @@ Proje iki ana mecrada çalışır:
 * Web Konsolu: [https://drunken-semaphore.web.app](https://drunken-semaphore.web.app)
 * Gizlilik Politikası: [https://drunken-semaphore.web.app/privacy.html](https://drunken-semaphore.web.app/privacy.html)
 
----
+═════════════════════════════════════════════════════════════════════════════════════════
+
+## Sample Images / Örnek Görseller
 
 <img width="1919" height="861" alt="Ekran görüntüsü 2026-10-28 151219" src="https://github.com/user-attachments/assets/5dbc3bda-7818-4126-9dee-4342d4d26f1e" />
 
