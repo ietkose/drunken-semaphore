@@ -1,56 +1,567 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="google" content="notranslate">
 
-    <title>Atmosphere - Focus, Relax & Vibe</title>
+    <title>Drunken Semaphore — Lo-Fi, Chill & Focus Console</title>
     <meta name="google-site-verification" content="IHjCJJ4IDxa6epoXpQLy9RDhUSym5mTkWTMq412_aLg" />
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=20261027_08">
 
-    <link rel="icon" type="image/png" href="/favicon.png?v=2">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+    <link rel="icon" type="image/png" href="favicon.png?v=3">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
 
-    <meta name="description" content="Atmosphere: Your 'lo-fi & chill' space for focus & relaxation. Odaklanma ve rahatlama mekanınız. Visual/music themes, timer & productivity tools.">
-    <meta name="keywords" content="focus, relax, audios, ambient sounds, music themes, visual themes, stopwatch, timer, alarm, world clock, birth chart, productivity, odaklanma, rahatlama, sesler, ambiyans sesleri, müzik temaları, görsel temalar, kronometre, sayaç, dünya saatleri, doğum haritası, üretkenlik">
-    <meta name="author" content="Atmosphere">
+    <meta name="description" content="Drunken Semaphore: Your 'lo-fi & chill' space for focus & relaxation. Odaklanma ve rahatlama konsolunuz. Visual/music themes, timer & productivity tools.">
+    <meta name="keywords" content="drunken semaphore, focus, relax, audios, ambient sounds, music themes, visual themes, stopwatch, timer, alarm, world clock, birth chart, productivity, odaklanma, rahatlama, sesler, ambiyans sesleri, müzik temaları, görsel temalar, kronometre, sayaç, dünya saatleri, doğum haritası, üretkenlik">
+    <meta name="author" content="Drunken Semaphore">
+
+    <meta name="theme-color" content="#00ff88">
 </head>
 
 <body>
-    <!-- Sayfanın içerisindeki her şey -->
-    <div class="app-container">
+    <!-- VIDEO ARKA PLAN (DÖNGÜSEL GIF GİBİ ÇALIŞIR) -->
+    <video id="bg-video" autoplay muted loop playsinline webkit-playsinline preload="none"></video>
 
-        <!-- Sayfada sol alan yarattık -->
-        <div class="side-wrapper left-wrapper">
+    <!-- CHROME EXTENSION NEW TAB EKRANI (EXTENSION SCREEN) -->
+    <div id="extension-screen" class="extension-screen">
+        <!-- Random Arka Plan Görseli (assets/first-page) -->
+        <div id="ext-bg-wallpaper" class="ext-bg-wallpaper" aria-hidden="true"></div>
+        
+        <!-- Sinematik Karartma ve Vignette Katmanı -->
+        <div class="ext-ambient-overlay"></div>
 
-            <!-- ATMOSPHERE KUTUSU -->
-            <div class="brand-sign glass-panel">
-                <h2 class="neon-title">ATMOSPHERE</h2>
-                <p style="color: #00ff88; margin: 0; font-size: 13px; letter-spacing: 2px; font-weight: 300;">Focus, Relax & Vibe</p>
+        <!-- Cihaz Yönü Uyarı Katmanı (Landscape Orient Gate) -->
+        <div class="orient-gate orient-gate-ext" aria-hidden="true">
+            <div class="orient-gate-card">
+                <div class="orient-gate-icon-box">
+                    <svg class="orient-gate-svg to-portrait" viewBox="0 0 48 48" width="48" height="48" fill="none">
+                        <rect x="15" y="7" width="18" height="34" rx="3.5" stroke="#ffffff" stroke-width="2.2" />
+                        <line x1="22" y1="36" x2="26" y2="36" stroke="#00ff88" stroke-width="2" stroke-linecap="round" />
+                        <path d="M7 24 C 7 14, 15 6, 24 6" stroke="#00ff88" stroke-width="2" stroke-dasharray="3 3" stroke-linecap="round" />
+                        <polyline points="20 2 24 6 20 10" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <h3 class="orient-gate-title"><span class="txt-orient-ext-title">DİKEY KULLANIM</span></h3>
+                <p class="orient-gate-desc"><span class="txt-orient-ext-desc">Bu ekran dikey kullanım için tasarlanmıştır. Lütfen cihazınızı dikey konuma getirin.</span></p>
+            </div>
+        </div>
+
+        <!-- Üst Kontrol Barı (Dil & Tam Ekran) -->
+        <header class="ext-header">
+            <div class="ext-header-actions">
+                <button id="ext-btn-lang" class="ext-pill-btn" title="Dili Değiştir / Switch Language">
+                    <span class="ext-lang-text">TR</span>
+                </button>
+                <button id="ext-btn-fullscreen" class="ext-pill-btn" title="Tam Ekran / Fullscreen">
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+                        <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- BAĞIMSIZ ÜST SAAT & TARİH KUTUSU (INDEPENDENT TOP CLOCK HUB) -->
+        <div class="ext-clock-hub">
+            <div id="ext-time" class="ext-digital-time">00:00</div>
+            <div id="ext-date" class="ext-digital-date">21 EKİM, ÇARŞAMBA</div>
+        </div>
+
+        <!-- Ana Gövde: Yan Linkler + Ortada Atmosphere ve Google Arama (DİKEYDE VE YATAYDA TAM ORTALI) -->
+        <main class="ext-main-stage">
+            
+            <!-- SOL YAN (LEFT FLANK): Google, Notion, NotebookLM, Google Scholar, Quizlet -->
+            <aside class="ext-side-flank ext-side-left">
+                <!-- 1. Google -->
+                <a href="https://www.google.com" target="_self" class="ext-quick-card" title="Google">
+                    <div class="ext-card-icon-box ext-google-box">
+                        <svg viewBox="0 0 24 24" width="20" height="20">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                        </svg>
+                    </div>
+                    <div class="ext-card-details">
+                        <span class="ext-card-name">Google</span>
+                        <span class="ext-card-url">google.com</span>
+                    </div>
+                    <svg class="ext-card-arrow" viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="7" y1="17" x2="17" y2="7"></line>
+                        <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                </a>
+
+                <!-- 2. Notion -->
+                <a href="https://www.notion.so" target="_blank" rel="noopener noreferrer" class="ext-quick-card" title="Notion">
+                    <div class="ext-card-icon-box ext-notion-box">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 1.968c-.42-.326-.98-.7-2.054-.607L3.107 2.388c-.466.046-.56.28-.373.466zm.84 3.73v13.62c0 .84.466 1.166 1.353 1.12l14.288-.84c.886-.046.793-.746.793-1.306V7.474c0-.606-.233-.886-.793-.84l-14.847.886c-.56.047-.794.327-.794.887zm13.12 1.4c.094.42 0 .84-.42.887l-.933.14v8.864c.513.28.98.14 1.306-.047.373-.233.42-.56.42-.98V9.385c0-.42-.187-.653-.653-.606zm-4.712.327c.187.326.14.7-.28.746l-.886.14v8.583c.793.514 1.54.42 1.912.094.373-.327.42-.653.42-1.12V9.758c0-.42-.187-.653-.653-.606l-.513.093v-.513zm-2.846.186l-2.8 4.713v-4.153c0-.42-.234-.607-.653-.56l-.98.14v.513c.28.047.466.187.466.607v9.423c0 .42-.186.607-.653.607l-.606-.047v.513l2.285-.14 3.127-5.04v4.433c0 .466.233.653.7.606l1.026-.14v-.513c-.327-.047-.466-.233-.466-.653V9.758c0-.42-.187-.607-.653-.56z"/>
+                        </svg>
+                    </div>
+                    <div class="ext-card-details">
+                        <span class="ext-card-name">Notion</span>
+                        <span class="ext-card-url">notion.so</span>
+                    </div>
+                    <svg class="ext-card-arrow" viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="7" y1="17" x2="17" y2="7"></line>
+                        <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                </a>
+
+                <!-- 3. NotebookLM -->
+                <a href="https://notebooklm.google.com" target="_blank" rel="noopener noreferrer" class="ext-quick-card" title="NotebookLM">
+                    <div class="ext-card-icon-box ext-notebook-box">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="#1A73E8"></path>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="#1A73E8"></path>
+                            <path d="M12 7l1 2.2 2.2 1-2.2 1-1 2.2-1-2.2-2.2-1 2.2-1 1-2.2z" fill="#00ff88" stroke="#00ff88"></path>
+                        </svg>
+                    </div>
+                    <div class="ext-card-details">
+                        <span class="ext-card-name">NotebookLM</span>
+                        <span class="ext-card-url">notebooklm.google</span>
+                    </div>
+                    <svg class="ext-card-arrow" viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="7" y1="17" x2="17" y2="7"></line>
+                        <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                </a>
+
+                <!-- 4. Google Scholar -->
+                <a href="https://scholar.google.com" target="_blank" rel="noopener noreferrer" class="ext-quick-card" title="Google Scholar">
+                    <div class="ext-card-icon-box ext-scholar-box">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#4285F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2" fill="#4285F4" fill-opacity="0.25"></polygon>
+                            <path d="M6 10.5V16c0 3.3 2.7 6 6 6s6-2.7 6-6v-5.5"></path>
+                            <path d="M22 7v9"></path>
+                        </svg>
+                    </div>
+                    <div class="ext-card-details">
+                        <span class="ext-card-name">Scholar</span>
+                        <span class="ext-card-url">scholar.google.com</span>
+                    </div>
+                    <svg class="ext-card-arrow" viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="7" y1="17" x2="17" y2="7"></line>
+                        <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                </a>
+
+                <!-- 5. Quizlet -->
+                <a href="https://quizlet.com" target="_blank" rel="noopener noreferrer" class="ext-quick-card" title="Quizlet">
+                    <div class="ext-card-icon-box ext-quizlet-box">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+                            <rect x="3" y="4" width="13" height="16" rx="3" stroke="#4257B2" stroke-width="2" fill="#4257B2" fill-opacity="0.2"></rect>
+                            <rect x="7" y="4" width="13" height="16" rx="3" stroke="#3CCFCF" stroke-width="2" fill="#3CCFCF" fill-opacity="0.25"></rect>
+                            <path d="M12 9h4M12 12h4M12 15h2" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round"></path>
+                        </svg>
+                    </div>
+                    <div class="ext-card-details">
+                        <span class="ext-card-name">Quizlet</span>
+                        <span class="ext-card-url">quizlet.com</span>
+                    </div>
+                    <svg class="ext-card-arrow" viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="7" y1="17" x2="17" y2="7"></line>
+                        <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                </a>
+            </aside>
+
+            <!-- ORTA (CENTER): ATMOSPHERE Animasyonu ve Bağlantı + Google Hızlı Bağlantısı -->
+            <section class="ext-center-flank">
+
+                <!-- 1. DRUNKEN SEMAPHORE KUTUSU (Animasyon ve Bağlantı) -->
+                <div id="btn-enter-atmosphere" class="brand-sign glass-panel ext-atmosphere-link" role="button" tabindex="0" title="Drunken Semaphore — Web Konsolunu Aç / Open Web Console">
+                    <h2 class="neon-title">DRUNKEN SEMAPHORE</h2>
+                    <p style="color: #00ff88; margin: 0; font-size: 13px; letter-spacing: 2px; font-weight: 300;">Lo-Fi, Chill & Focus Console</p>
+                </div>
+
+                <!-- 2. ORTA ALT: Şık Google Hızlı Bağlantısı (Dedicated Link) -->
+                <div class="ext-center-actions">
+                    <a href="https://www.google.com" target="_self" class="ext-center-google-link" title="Google'a Git / Visit Google">
+                        <svg class="ext-google-icon" viewBox="0 0 24 24" width="18" height="18">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                        </svg>
+                        <span class="ext-google-btn-text">Google</span>
+                        <svg class="ext-google-btn-arrow" viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </section>
+
+            <!-- SAĞ YAN (RIGHT FLANK): Spotify, YouTube, GitHub, Goodreads, Pinterest -->
+            <aside class="ext-side-flank ext-side-right">
+                <!-- 1. Spotify -->
+                <a href="https://open.spotify.com" target="_blank" rel="noopener noreferrer" class="ext-quick-card" title="Spotify">
+                    <div class="ext-card-icon-box ext-spotify-box">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="#1DB954">
+                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.5 17.3c-.2.3-.6.4-.9.2-2.5-1.5-5.6-1.9-9.3-1-.4.1-.7-.2-.8-.5-.1-.4.2-.7.5-.8 4-.9 7.5-.5 10.3 1.2.3.2.4.6.2.9zm1.5-3.3c-.3.4-.8.5-1.2.3-3-1.8-7.5-2.3-11-1.3-.5.1-.9-.2-1-.6-.1-.5.2-.9.6-1 4-1.2 9-.6 12.3 1.5.5.2.6.7.3 1.1zm.1-3.4C15.6 8.5 9.1 8.3 5.3 9.4c-.6.2-1.2-.2-1.4-.7-.2-.6.2-1.2.7-1.4 4.5-1.3 11.6-1.1 16 1.5.5.3.7 1 .4 1.5-.3.5-1 .7-1.5.4z"/>
+                        </svg>
+                    </div>
+                    <div class="ext-card-details">
+                        <span class="ext-card-name">Spotify</span>
+                        <span class="ext-card-url">spotify.com</span>
+                    </div>
+                    <svg class="ext-card-arrow" viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="7" y1="17" x2="17" y2="7"></line>
+                        <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                </a>
+
+                <!-- 2. YouTube -->
+                <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="ext-quick-card" title="YouTube">
+                    <div class="ext-card-icon-box ext-youtube-box">
+                        <svg viewBox="0 0 24 24" width="20" height="20">
+                            <path fill="#FF0000" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/>
+                            <polygon fill="#FFFFFF" points="9.545 15.568 15.818 12 9.545 8.432"/>
+                        </svg>
+                    </div>
+                    <div class="ext-card-details">
+                        <span class="ext-card-name">YouTube</span>
+                        <span class="ext-card-url">youtube.com</span>
+                    </div>
+                    <svg class="ext-card-arrow" viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="7" y1="17" x2="17" y2="7"></line>
+                        <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                </a>
+
+                <!-- 3. GitHub -->
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="ext-quick-card" title="GitHub">
+                    <div class="ext-card-icon-box ext-github-box">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                        </svg>
+                    </div>
+                    <div class="ext-card-details">
+                        <span class="ext-card-name">GitHub</span>
+                        <span class="ext-card-url">github.com</span>
+                    </div>
+                    <svg class="ext-card-arrow" viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="7" y1="17" x2="17" y2="7"></line>
+                        <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                </a>
+
+                <!-- 4. Goodreads -->
+                <a href="https://www.goodreads.com" target="_blank" rel="noopener noreferrer" class="ext-quick-card" title="Goodreads">
+                    <div class="ext-card-icon-box ext-goodreads-box">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="#d69e2e" stroke-width="2"></path>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="#d69e2e" stroke-width="2" fill="#d69e2e" fill-opacity="0.18"></path>
+                            <path d="M14.5 10c0-2-1-3-2.5-3s-2.5 1-2.5 3 1 3 2.5 3c.8 0 1.5-.3 2-1v2.5c0 1.5-.8 2-2 2-.8 0-1.5-.3-1.8-.8" stroke="#f6ad55" stroke-width="1.8" stroke-linecap="round"></path>
+                        </svg>
+                    </div>
+                    <div class="ext-card-details">
+                        <span class="ext-card-name">Goodreads</span>
+                        <span class="ext-card-url">goodreads.com</span>
+                    </div>
+                    <svg class="ext-card-arrow" viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="7" y1="17" x2="17" y2="7"></line>
+                        <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                </a>
+
+                <!-- 5. Pinterest -->
+                <a href="https://www.pinterest.com" target="_blank" rel="noopener noreferrer" class="ext-quick-card" title="Pinterest">
+                    <div class="ext-card-icon-box ext-pinterest-box">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="#E60023">
+                            <path d="M12 0a12 12 0 0 0-4.37 23.18c-.06-.94-.1-2.4.05-3.43l1.08-4.57s-.27-.55-.27-1.37c0-1.28.74-2.24 1.67-2.24.78 0 1.16.59 1.16 1.3 0 .79-.5 1.98-.77 3.08-.22.93.46 1.68 1.38 1.68 1.65 0 2.92-1.74 2.92-4.26 0-2.23-1.6-3.79-3.89-3.79-2.65 0-4.2 1.99-4.2 4.04 0 .8.31 1.66.7 2.13.08.1.09.18.06.33l-.26 1.08c-.04.18-.14.22-.33.13-1.24-.58-2.02-2.39-2.02-3.85 0-3.13 2.28-6.01 6.57-6.01 3.45 0 6.13 2.46 6.13 5.75 0 3.43-2.16 6.19-5.16 6.19-1.01 0-1.96-.52-2.28-1.14l-.62 2.37c-.23.86-.84 1.94-1.25 2.6A12 12 0 1 0 12 0z"/>
+                        </svg>
+                    </div>
+                    <div class="ext-card-details">
+                        <span class="ext-card-name">Pinterest</span>
+                        <span class="ext-card-url">pinterest.com</span>
+                    </div>
+                    <svg class="ext-card-arrow" viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="7" y1="17" x2="17" y2="7"></line>
+                        <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                </a>
+            </aside>
+
+        </main>
+    </div>
+
+    <!-- OPEN-WORLD HARİTA EKRANI (MAP SCREEN) -->
+    <div id="map-screen" class="map-screen map-hidden">
+        <!-- Sinematik Ortam Arka Planı (Ambient Glow) -->
+        <div class="map-ambient-backdrop"></div>
+
+        <!-- Cihaz Yönü Uyarı Katmanı (Portrait Orient Gate) -->
+        <div class="orient-gate orient-gate-map" aria-hidden="true">
+            <div class="orient-gate-card">
+                <div class="orient-gate-icon-box">
+                    <svg class="orient-gate-svg to-landscape" viewBox="0 0 48 48" width="48" height="48" fill="none">
+                        <rect x="7" y="15" width="34" height="18" rx="3.5" stroke="#ffffff" stroke-width="2.2" />
+                        <line x1="36" y1="22" x2="36" y2="26" stroke="#00ff88" stroke-width="2" stroke-linecap="round" />
+                        <path d="M24 7 C 34 7, 41 15, 41 24" stroke="#00ff88" stroke-width="2" stroke-dasharray="3 3" stroke-linecap="round" />
+                        <polyline points="45 20 41 24 37 20" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <h3 class="orient-gate-title"><span class="txt-orient-map-title">YATAY KONSOL</span></h3>
+                <p class="orient-gate-desc"><span class="txt-orient-map-desc">Harita konsolu yatay kullanım için tasarlanmıştır. Lütfen cihazınızı yatay konuma getirin.</span></p>
+            </div>
+        </div>
+
+
+        <!-- SOL JOY-CON KOLU (Neon Kırmızı Gövde + Analog Stick + Dikey ATMOSPHERE + D-Pad + Capture) -->
+        <div class="map-flank map-flank-left">
+            <div class="joycon-control joycon-top-row joycon-row-right">
+                <div class="joycon-minus-btn" title="-"></div>
             </div>
 
-            <!-- SOL PANEL KUTUSU -->
-            <nav class="sidebar glass-panel">
-                <div class="menu-group">
-                    <h3 class="panel-title accordion-btn">FEATURES</h3>
-        
-                    <ul id="features-list" class="static-menu-list">
-                        <li class="active tab-link" onclick="openTab(event, 'clock-view')">&#x21A0; &nbsp; Home</li>
-                        <li class="tab-link" onclick="openTab(event, 'stopwatch-view')">&#x21A0; &nbsp; Stopwatch</li>
-                        <li class="tab-link" onclick="openTab(event, 'timer-view')">&#x21A0; &nbsp; Timer</li>
-                        <li class="tab-link" onclick="openTab(event, 'alarm-view')">&#x21A0; &nbsp; Alarm Clock</li>
-                        <li class="tab-link" onclick="openTab(event, 'world-clock-view')">&#x21A0; &nbsp; World Clock</li>
-                        <li class="tab-link" onclick="openTab(event, 'birth-chart-view')">&#x21A0; &nbsp; Birth Chart</li>
-                    </ul>
+            <div class="joycon-control joycon-stick-assembly">
+                <div class="joycon-stick-well">
+                    <div class="joycon-stick-cap" id="left-stick" title="Analog Joystick">
+                        <div class="joycon-stick-inner"></div>
+                    </div>
                 </div>
-            </nav>
+            </div>
+
+            <h1 class="map-vertical-title">DRUNKEN SEMAPHORE</h1>
+
+            <div class="joycon-control joycon-pad-group joycon-dpad">
+                <div class="joycon-round-btn dpad-up" data-key="up" title="Yukarı / Up">
+                    <svg class="dpad-arrow-icon" viewBox="0 0 24 24"><polygon points="12 5 4 19 20 19"></polygon></svg>
+                </div>
+                <div class="joycon-round-btn dpad-left" data-key="left" title="Sol / Left">
+                    <svg class="dpad-arrow-icon" viewBox="0 0 24 24"><polygon points="5 12 19 4 19 20"></polygon></svg>
+                </div>
+                <div class="joycon-round-btn dpad-right" data-key="right" title="Sağ / Right">
+                    <svg class="dpad-arrow-icon" viewBox="0 0 24 24"><polygon points="19 12 5 4 5 20"></polygon></svg>
+                </div>
+                <div class="joycon-round-btn dpad-down" data-key="down" title="Aşağı / Down">
+                    <svg class="dpad-arrow-icon" viewBox="0 0 24 24"><polygon points="12 19 4 5 20 5"></polygon></svg>
+                </div>
+            </div>
+
+            <div class="joycon-control joycon-bottom-row joycon-row-right">
+                <div class="joycon-capture-btn" aria-hidden="true">
+                    <div class="joycon-capture-inner"></div>
+                </div>
+            </div>
         </div>
+
+        <!-- SAĞ JOY-CON KOLU (Neon Yeşil Gövde + X/Y/A/B + Dikey MEKANINI SEÇ + Analog Stick + Home) -->
+        <div class="map-flank map-flank-right">
+            <div class="joycon-control joycon-top-row joycon-row-left" style="height: 20px;">
+                <!-- Sağ üst artı butonu kaldırıldı -->
+            </div>
+
+            <div class="joycon-control joycon-pad-group joycon-abxy">
+                <div class="joycon-round-btn abxy-x" data-btn="x" title="Rastgele Mekan Seç / Random (X)"><span>X</span></div>
+                <div class="joycon-round-btn abxy-y" data-btn="y" title="Lobi Müziği Önizle / Preview Audio (Y)"><span>Y</span></div>
+                <div class="joycon-round-btn abxy-a" data-btn="a" title="Seç / Giriş Yap / Enter (A)"><span>A</span></div>
+                <div class="joycon-round-btn abxy-b" data-btn="b" title="Seçimi Sıfırla & Müziği Kapat / Reset (B)"><span>B</span></div>
+            </div>
+
+            <h2 class="map-vertical-subtitle"><span class="txt-map-subtitle">MEKANINI SEÇ</span></h2>
+
+            <div class="joycon-control joycon-stick-assembly">
+                <div class="joycon-stick-well">
+                    <div class="joycon-stick-cap" id="right-stick" title="Analog Joystick">
+                        <div class="joycon-stick-inner"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="joycon-control joycon-bottom-row joycon-row-left">
+                <div class="joycon-home-btn" id="btn-map-home" title="İlk Sayfaya Dön / Home" role="button" tabindex="0">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                        <path d="M12 3L4 9v12h5v-7h6v7h5V9z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- İnteraktif Harita Sahnesi (Tam Sığan, Kesilmeyen Konteyner) -->
+        <div class="map-stage-wrapper">
+            <div class="map-stage">
+                <!-- Harita Videosu / GIF (Sıfır Kesilme ile Birebir Sahneye Oturur) -->
+                <video id="map-video" class="map-stage-image" autoplay loop muted playsinline webkit-playsinline preload="none" poster="assets/map/map-bg.png">
+                    <source src="assets/map/map-bg.mp4" type="video/mp4">
+                </video>
+                <!-- 1. Cowboy Era: Wild Saloon -->
+                <div class="building-hotspot" data-theme="cowboy-era" style="left: 4%; top: 28%; width: 17%; height: 28%;">
+                    <div class="hotspot-highlight"></div>
+                </div>
+
+                <!-- 2. Jazz & Romance: Velvet Club -->
+                <div class="building-hotspot" data-theme="jazz-romance" style="left: 26%; top: 7%; width: 15%; height: 30%;">
+                    <div class="hotspot-highlight"></div>
+                </div>
+
+                <!-- 3. Rock n' Roll: Skull Rider Bar -->
+                <div class="building-hotspot" data-theme="rock-n-roll" style="left: 55%; top: 6%; width: 17%; height: 30%;">
+                    <div class="hotspot-highlight"></div>
+                </div>
+
+                <!-- 4. Dark Fantasy: Cursed Cathedral -->
+                <div class="building-hotspot" data-theme="dark-fantasy" style="left: 75%; top: 5%; width: 21%; height: 38%;">
+                    <div class="hotspot-highlight"></div>
+                </div>
+
+                <!-- 5. The Pasific Crest -->
+                <div class="building-hotspot" data-theme="the-pasific-crest" style="left: 6%; top: 57%; width: 29%; height: 33%;">
+                    <div class="hotspot-highlight"></div>
+                </div>
+
+                <!-- 6. Light Fantasy: Dragon's Sanctuary -->
+                <div class="building-hotspot" data-theme="light-fantasy" style="left: 39%; top: 62%; width: 20%; height: 33%;">
+                    <div class="hotspot-highlight"></div>
+                </div>
+
+                <!-- 7. Milky Way: Orbital Spaceport -->
+                <div class="building-hotspot" data-theme="milky-way" style="left: 40%; top: 25%; width: 18%; height: 30%;">
+                    <div class="hotspot-highlight"></div>
+                </div>
+
+                <!-- 8. Cyber World: Neon Tower -->
+                <div class="building-hotspot" data-theme="cyber-world" style="left: 81%; top: 44%; width: 19%; height: 55%;">
+                    <div class="hotspot-highlight"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- İnteraktif Bilgi Kartı (Bina üzerine gelince açılır - Dinamik Tema Renkli) -->
+        <div id="building-card" class="building-card">
+            <div class="building-hud-header">
+                <span class="building-hud-dot"></span>
+                <span id="card-tag" class="building-hud-tag">DRUNKEN SEMAPHORE</span>
+                <span class="building-hud-badge txt-hud-badge">EXPLORE</span>
+            </div>
+            <h3 id="card-title" class="building-title">District Name</h3>
+            <p id="card-desc" class="building-desc"></p>
+            <div class="building-hud-action">
+                <span class="building-hud-prompt">
+                    <span class="hud-key-pill">A</span>
+                    <span class="txt-hud-enter">GİRİŞ YAP / ENTER</span>
+                </span>
+                <span class="building-hud-arrow">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </span>
+            </div>
+        </div>
+
+        <!-- Joy-Con Konsol Tuş Kılavuzu (HUD Controller Action Guide) -->
+        <div class="joycon-action-guide">
+            <div class="guide-item"><span class="guide-key guide-key-a">A</span> <span class="guide-txt txt-guide-a">Giriş Yap</span></div>
+            <div class="guide-item"><span class="guide-key guide-key-b">B</span> <span class="guide-txt txt-guide-b">Sıfırla</span></div>
+            <div class="guide-item"><span class="guide-key guide-key-x">X</span> <span class="guide-txt txt-guide-x">Rastgele</span></div>
+            <div class="guide-item"><span class="guide-key guide-key-y">Y</span> <span class="guide-txt txt-guide-y">Lobi Müziği</span></div>
+        </div>
+    </div>
+
+    <!-- Sayfanın içerisindeki her şey (Ana Çalışma Alanı) -->
+    <div class="app-container">
+
+        <!-- Cihaz Yönü Uyarı Katmanı (Normal Konsol: Yatayda Uyarır) -->
+        <div class="orient-gate orient-gate-app-portrait" aria-hidden="true">
+            <div class="orient-gate-card">
+                <div class="orient-gate-icon-box">
+                    <svg class="orient-gate-svg to-portrait" viewBox="0 0 48 48" width="48" height="48" fill="none">
+                        <rect x="15" y="7" width="18" height="34" rx="3.5" stroke="#ffffff" stroke-width="2.2" />
+                        <line x1="22" y1="36" x2="26" y2="36" stroke="#00ff88" stroke-width="2" stroke-linecap="round" />
+                        <path d="M7 24 C 7 14, 15 6, 24 6" stroke="#00ff88" stroke-width="2" stroke-dasharray="3 3" stroke-linecap="round" />
+                        <polyline points="20 2 24 6 20 10" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <h3 class="orient-gate-title"><span class="txt-orient-room-title">DİKEY KONSOL</span></h3>
+                <p class="orient-gate-desc"><span class="txt-orient-room-desc">Konsol görünümü dikey kullanım için tasarlanmıştır. Lütfen cihazınızı dikey konuma getirin veya tam ekran moduna geçin.</span></p>
+            </div>
+        </div>
+
+        <!-- Cihaz Yönü Uyarı Katmanı (Sinematik Fullscreen: Dikeyde Uyarır) -->
+        <div class="orient-gate orient-gate-app-landscape" aria-hidden="true">
+            <div class="orient-gate-card">
+                <div class="orient-gate-icon-box">
+                    <svg class="orient-gate-svg to-landscape" viewBox="0 0 48 48" width="48" height="48" fill="none">
+                        <rect x="7" y="15" width="34" height="18" rx="3.5" stroke="#ffffff" stroke-width="2.2" />
+                        <line x1="36" y1="22" x2="36" y2="26" stroke="#00ff88" stroke-width="2" stroke-linecap="round" />
+                        <path d="M24 7 C 34 7, 41 15, 41 24" stroke="#00ff88" stroke-width="2" stroke-dasharray="3 3" stroke-linecap="round" />
+                        <polyline points="45 20 41 24 37 20" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <h3 class="orient-gate-title"><span class="txt-orient-cinema-title">SİNEMATİK MOD</span></h3>
+                <p class="orient-gate-desc"><span class="txt-orient-cinema-desc">Sinematik tam ekran modu yatay kullanım için tasarlanmıştır. Lütfen cihazınızı yatay konuma getirin.</span></p>
+            </div>
+        </div>
+
+        <!-- Sol Dikey Dock Bar (60px) -->
+        <aside class="dock-bar glass-panel">
+            <div class="dock-top-group">
+                <button class="dock-btn active" data-dock="home" title="Home">
+                    <svg class="dock-icon" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    <span class="dock-tooltip dock-tt-home">Home</span>
+                </button>
+
+                <button class="dock-btn" data-dock="features" title="Features">
+                    <svg class="dock-icon" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                    <span class="dock-tooltip dock-tt-features">Features</span>
+                </button>
+
+                <button class="dock-btn" data-dock="music" title="Music">
+                    <svg class="dock-icon" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18V5l12-2v13"></path>
+                        <circle cx="6" cy="18" r="3"></circle>
+                        <circle cx="18" cy="16" r="3"></circle>
+                    </svg>
+                    <span class="dock-tooltip dock-tt-music">Music</span>
+                </button>
+
+                <button class="dock-btn" data-dock="visual" title="Visual">
+                    <svg class="dock-icon" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                    <span class="dock-tooltip dock-tt-visual">Visual</span>
+                </button>
+            </div>
+
+            <div class="dock-bottom-group">
+                <a href="https://buymeacoffee.com/ietkose" target="_blank" rel="noopener noreferrer" class="dock-btn dock-coffee-btn" data-dock="coffee" title="Support Me">
+                    <svg class="dock-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                        <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+                        <line x1="6" y1="1" x2="6" y2="4"></line>
+                        <line x1="10" y1="1" x2="10" y2="4"></line>
+                        <line x1="14" y1="1" x2="14" y2="4"></line>
+                    </svg>
+                    <span class="dock-tooltip dock-tt-coffee">Support Me</span>
+                </a>
+
+                <button id="btn-return-map" class="dock-btn dock-map-btn" data-dock="map" title="MAP">
+                    <svg class="dock-icon" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+                        <line x1="8" y1="2" x2="8" y2="18"></line>
+                        <line x1="16" y1="6" x2="16" y2="22"></line>
+                    </svg>
+                    <span class="dock-tooltip dock-tt-map">MAP</span>
+                </button>
+            </div>
+        </aside>
         <!-- Sayfada orta alan yarattık-->
         <main class="main-content">
 
             <!-- FULLSCREEN KUTUCUĞU -->
-            <button id="btn-fullscreen" class="glass-btn" style="position: absolute; top: 28px; right: 15px; z-index: 100;">⛶ Fullscreen</button>
+            <button id="btn-fullscreen" class="glass-btn" style="position: absolute; top: 28px; right: 15px; z-index: 100;"><span class="txt-fullscreen">⛶ Fullscreen</span></button>
 
             <!-- ORTA KUTU (FEATURES KUTUSU) -->
              <!-- HOME KUTUCUĞU -->
@@ -61,245 +572,594 @@
 
             <!-- STOPWATCH KUTUCUĞU -->
             <div id="stopwatch-view" class="view-box tab-content glass-panel" style="display: none;">
-                <h2>Stopwatch</h2>
+                <h2 class="view-h2-stopwatch">Stopwatch</h2>
                 <h1 id="sw-display">00:00:00</h1>
                 <div class="stopwatch-controls">
-                    <button id="btn-start" class="glass-btn">Start</button>
-                    <button id="btn-stop" class="glass-btn">Stop</button>
-                    <button id="btn-lap" class="glass-btn">Lap</button>
-                    <button id="btn-reset" class="glass-btn">Reset</button>
+                    <button id="btn-start" class="glass-btn btn-txt-start">Start</button>
+                    <button id="btn-stop" class="glass-btn btn-txt-stop">Stop</button>
+                    <button id="btn-lap" class="glass-btn btn-txt-lap">Lap</button>
+                    <button id="btn-reset" class="glass-btn btn-txt-reset">Reset</button>
                 </div>
                 <div id="laps-container"></div>
             </div>
 
             <!-- TIMER KUTUCUĞU -->
             <div id="timer-view" class="view-box tab-content glass-panel" style="display: none;">
-                <h2>Timer</h2>
+                <h2 class="view-h2-timer">Timer</h2>
                 <h1 id="timer-display">00:00:00</h1>
                 <div class="timer-input-group" style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 20px;">
                     <div class="input-wrapper" style="display: flex; align-items: center; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; height: 35px; overflow: hidden;">
-                        <button class="spin-btn" onclick="document.getElementById('timer-input-hour').stepDown()" style="background: transparent; border: none; color: #b3b3b3; font-size: 16px; cursor: pointer; padding: 0 8px;">-</button>
+                        <button class="spin-btn" data-spin-target="timer-input-hour" data-spin-action="down" style="background: transparent; border: none; color: #b3b3b3; font-size: 16px; cursor: pointer; padding: 0 8px;">-</button>
                         <input type="number" id="timer-input-hour" placeholder="Hr" min="0" max="99" style="width: 35px; height: 100%; text-align: center; background: transparent; border: none; color: white; outline: none; padding: 0; font-size: 16px; font-family: 'Poppins', sans-serif;">
-                        <button class="spin-btn" onclick="document.getElementById('timer-input-hour').stepUp()" style="background: transparent; border: none; color: #b3b3b3; font-size: 16px; cursor: pointer; padding: 0 8px;">+</button>
+                        <button class="spin-btn" data-spin-target="timer-input-hour" data-spin-action="up" style="background: transparent; border: none; color: #b3b3b3; font-size: 16px; cursor: pointer; padding: 0 8px;">+</button>
                     </div>
                     <span style="font-size: 20px; font-weight: bold; color: rgba(255,255,255,0.5);">:</span>
                     <div class="input-wrapper" style="display: flex; align-items: center; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; height: 35px; overflow: hidden;">
-                        <button class="spin-btn" onclick="document.getElementById('timer-input-min').stepDown()" style="background: transparent; border: none; color: #b3b3b3; font-size: 16px; cursor: pointer; padding: 0 8px;">-</button>
+                        <button class="spin-btn" data-spin-target="timer-input-min" data-spin-action="down" style="background: transparent; border: none; color: #b3b3b3; font-size: 16px; cursor: pointer; padding: 0 8px;">-</button>
                         <input type="number" id="timer-input-min" placeholder="Min" min="0" max="59" style="width: 35px; height: 100%; text-align: center; background: transparent; border: none; color: white; outline: none; padding: 0; font-size: 16px; font-family: 'Poppins', sans-serif;">
-                        <button class="spin-btn" onclick="document.getElementById('timer-input-min').stepUp()" style="background: transparent; border: none; color: #b3b3b3; font-size: 16px; cursor: pointer; padding: 0 8px;">+</button>
+                        <button class="spin-btn" data-spin-target="timer-input-min" data-spin-action="up" style="background: transparent; border: none; color: #b3b3b3; font-size: 16px; cursor: pointer; padding: 0 8px;">+</button>
                     </div>
                     <span style="font-size: 20px; font-weight: bold; color: rgba(255,255,255,0.5);">:</span>
                     <div class="input-wrapper" style="display: flex; align-items: center; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; height: 35px; overflow: hidden;">
-                        <button class="spin-btn" onclick="document.getElementById('timer-input-sec').stepDown()" style="background: transparent; border: none; color: #b3b3b3; font-size: 16px; cursor: pointer; padding: 0 8px;">-</button>
+                        <button class="spin-btn" data-spin-target="timer-input-sec" data-spin-action="down" style="background: transparent; border: none; color: #b3b3b3; font-size: 16px; cursor: pointer; padding: 0 8px;">-</button>
                         <input type="number" id="timer-input-sec" placeholder="Sec" min="0" max="59" style="width: 35px; height: 100%; text-align: center; background: transparent; border: none; color: white; outline: none; padding: 0; font-size: 16px; font-family: 'Poppins', sans-serif;">
-                        <button class="spin-btn" onclick="document.getElementById('timer-input-sec').stepUp()" style="background: transparent; border: none; color: #b3b3b3; font-size: 16px; cursor: pointer; padding: 0 8px;">+</button>
+                        <button class="spin-btn" data-spin-target="timer-input-sec" data-spin-action="up" style="background: transparent; border: none; color: #b3b3b3; font-size: 16px; cursor: pointer; padding: 0 8px;">+</button>
                     </div>
                 </div>
 
-                <!-- Class tasarrufu -->
                 <div class="stopwatch-controls">
-                    <button id="btn-timer-start" class="glass-btn">Start</button>
-                    <button id="btn-timer-pause" class="glass-btn">Pause / Stop</button> <button id="btn-timer-reset" class="glass-btn">Reset</button>
+                    <button id="btn-timer-start" class="glass-btn btn-txt-start">Start</button>
+                    <button id="btn-timer-pause" class="glass-btn btn-txt-pause">Pause / Stop</button>
+                    <button id="btn-timer-reset" class="glass-btn btn-txt-reset">Reset</button>
                 </div>
             </div>
 
             <!-- ALARM KUTUCUĞU -->
            <div id="alarm-view" class="view-box tab-content glass-panel" style="display: none;">
-                <h2>Alarm</h2>
+                <h2 class="view-h2-alarm">Alarm</h2>
     
                 <div class="input-wrapper" style="margin: 0 auto 15px auto; width: max-content; padding: 0 15px;">
                     <input type="time" id="alarm-time-input" class="time-date-input">
                 </div>
     
-                <button id="btn-set-alarm" class="glass-btn" onclick="if(window.alarm) window.alarm.setAlarm()">Set</button>
-                <button id="btn-cancel-alarm" class="glass-btn" style="display: none;" onclick="if(window.alarm) window.alarm.cancelAlarm()">Cancel</button>
+                <button id="btn-set-alarm" class="glass-btn btn-txt-set">Set</button>
+                <button id="btn-cancel-alarm" class="glass-btn btn-txt-cancel" style="display: none;">Cancel</button>
 
-                <h3 id="alarm-status" style="margin-top: 15px; color: #b3b3b3;">No Alarm Set</h3>
+                <h3 id="alarm-status" style="margin-top: 15px; color: #b3b3b3;" class="txt-alarm-status">No Alarm Set</h3>
 
                 <div id="alarm-controls" style="display: none; margin-top: 15px;">
-                    <button id="btn-snooze" class="glass-btn" style="background: rgba(136, 255, 0);" onclick="if(window.alarm) window.alarm.snoozeAlarm()">Snooze (5 min)</button>
-                    <button id="btn-dismiss" class="glass-btn" style="background: rgba(255, 0, 0);" onclick="if(window.alarm) window.alarm.dismissAlarm()">Dismiss</button>
+                    <button id="btn-snooze" class="glass-btn btn-txt-snooze" style="background: rgba(136, 255, 0);">Snooze (5 min)</button>
+                    <button id="btn-dismiss" class="glass-btn btn-txt-dismiss" style="background: rgba(255, 0, 0);">Dismiss</button>
+
                 </div>
 
                 <div id="alarm-credit-box" style="display: none; margin-top: 15px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">
-                    <span class="credit-text" style="color: rgba(255, 255, 255, 0.5); font-size: 11px;">Sound by: Nickpanekaiassets from Pixabay</span>
+                    <span class="credit-text txt-alarm-credit" style="color: rgba(255, 255, 255, 0.5); font-size: 11px;">Sound by: Nickpanekaiassets from Pixabay</span>
                 </div>
             </div>
 
             <!-- WC KUTUCUĞU -->
             <div id="world-clock-view" class="view-box tab-content glass-panel" style="display: none;">
-                <h2>World Clock</h2>
-                <p>Local: <span id="wc-local"></span></p>
-                <p>Istanbul: <span id="wc-istanbul"></span></p>
-                <p>New York: <span id="wc-newyork"></span></p>
-                <p>London: <span id="wc-london"></span></p>
-                <p>Tokyo: <span id="wc-tokyo"></span></p>
+                <h2 class="view-h2-worldclock">World Clock</h2>
+                <p><span class="wc-label-local">Local:</span> <span id="wc-local"></span></p>
+                <p><span class="wc-label-ist">Istanbul:</span> <span id="wc-istanbul"></span></p>
+                <p><span class="wc-label-ny">New York:</span> <span id="wc-newyork"></span></p>
+                <p><span class="wc-label-lon">London:</span> <span id="wc-london"></span></p>
+                <p><span class="wc-label-tok">Tokyo:</span> <span id="wc-tokyo"></span></p>
             </div>
 
             <!-- BC KUTUCUĞU -->
             <div id="birth-chart-view" class="view-box tab-content glass-panel" style="display: none;">
-                <h2>Birth Chart</h2>
+                <h2 class="view-h2-birthchart">Birth Chart</h2>
                 <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 20px;">
                     <div class="input-wrapper" style="padding: 0 15px;"><input type="date" id="birth-date" class="time-date-input"></div>
                     <div class="input-wrapper" style="padding: 0 15px;"><input type="time" id="birth-time" class="time-date-input"></div>
                 </div>
-                <button id="btn-calculate-zodiac" class="glass-btn">Calculate</button>
+                <button id="btn-calculate-zodiac" class="glass-btn btn-txt-calc">Calculate</button>
                 <div id="zodiac-result" style="display: none; margin-top: 15px; border: 1px solid rgba(255,255,255,0.1); padding: 10px; border-radius: 5px; text-align: left; font-size: 14px;">
-                    <p>☀️ Sun Sign: <span id="res-sun" style="color: #00ff88;"></span></p>
-                    <p>🌿 Element: <span id="res-element" style="color: #00ff88;"></span></p>
-                    <p>🐉 Chinese Zodiac: <span id="res-chinese" style="color: #00ff88;"></span></p>
-                    <p>🔢 Life Path Number: <span id="res-lifepath" style="color: #00ff88;"></span></p>
-                    <p>🌕 Moon Phase: <span id="res-moon-phase" style="color: #00ff88;"></span></p>
+                    <p><span class="bc-label-sun">Sun Sign: </span><span id="res-sun" style="color: #00ff88;"></span></p>
+                    <p><span class="bc-label-element">Element: </span><span id="res-element" style="color: #00ff88;"></span></p>
+                    <p><span class="bc-label-chinese">Chinese Zodiac: </span><span id="res-chinese" style="color: #00ff88;"></span></p>
+                    <p><span class="bc-label-lifepath">Life Path Number: </span><span id="res-lifepath" style="color: #00ff88;"></span></p>
+                    <p><span class="bc-label-moon">Moon Phase: </span><span id="res-moon-phase" style="color: #00ff88;"></span></p>
                 </div>
+            </div>
+
+            <!-- POMODORO KUTUCUĞU -->
+            <div id="pomodoro-view" class="view-box tab-content glass-panel" style="display: none;">
+                <h2 class="view-h2-pomodoro">Pomodoro</h2>
+                <h1 id="pomo-display">25:00</h1>
+                <p id="pomo-session" style="color: #00ff88; font-size: 13px; font-weight: 500; margin: 4px 0 12px 0;">Session: 0/4</p>
+                <div class="stopwatch-controls">
+                    <button id="btn-pomo-start" class="glass-btn btn-txt-start">Start</button>
+                    <button id="btn-pomo-pause" class="glass-btn btn-txt-pause">Pause / Stop</button>
+                    <button id="btn-pomo-reset" class="glass-btn btn-txt-reset">Reset</button>
+                </div>
+                <div style="margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <button class="glass-btn pomo-preset-btn" style="font-size: 11px; padding: 6px 14px;" data-work="25" data-break="5">25/5</button>
+                    <button class="glass-btn pomo-preset-btn" style="font-size: 11px; padding: 6px 14px;" data-work="50" data-break="10">50/10</button>
+                    <button class="glass-btn pomo-preset-btn" style="font-size: 11px; padding: 6px 14px;" data-work="90" data-break="20">90/20</button>
+                </div>
+            </div>
+
+            <!-- TO-DO KUTUCUĞU -->
+            <div id="todo-view" class="view-box tab-content glass-panel" style="display: none;">
+                <h2 class="view-h2-todo">To-Do</h2>
+                <div style="display: flex; gap: 8px; margin-bottom: 15px;">
+                    <input type="text" id="todo-input" placeholder="Add a task..." 
+                           style="flex: 1; padding: 10px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); 
+                                  border-radius: 8px; color: white; font-family: 'Poppins'; outline: none;">
+                    <button id="btn-todo-add" class="glass-btn btn-txt-add" style="font-size: 18px; padding: 8px 16px;">+</button>
+                </div>
+                <ul id="todo-list" style="list-style: none; padding: 0; max-height: 300px; overflow-y: auto;"></ul>
             </div>
         </main>
 
-        <!-- Sayfada sağ alan yarattık -->
-        <div class="side-wrapper right-wrapper">
+        <!-- Sağ Kayar Panel (340px Slide Panel) -->
+        <aside id="slide-panel" class="slide-panel glass-panel">
+            <div class="slide-panel-header">
+                <h3 id="slide-panel-title" class="slide-panel-title">PANEL</h3>
+                <button id="btn-close-panel" class="close-panel-btn" title="Close Panel">&times;</button>
+            </div>
+            
+            <div class="slide-panel-body">
+                <!-- 1. Müzik Paneli (6 Sekmeli) -->
+                <div class="panel-view" data-panel="music">
+                    <!-- 6 Sekmeli Müzik Barı (3x2 Izgara) -->
+                    <div class="music-tabs-bar">
+                        <button class="music-tab-btn active" data-music-tab="radio" title="Live Radio">
+                            <span class="music-tab-icon">
+                                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="2"></circle>
+                                    <path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"></path>
+                                </svg>
+                            </span>
+                            <span class="music-tab-label tab-lbl-radio">Radio</span>
+                        </button>
+                        <button class="music-tab-btn" data-music-tab="freq" title="Frequencies">
+                            <span class="music-tab-icon">
+                                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M2 12h3l3-8 4 16 3-10 2 5h5"></path>
+                                </svg>
+                            </span>
+                            <span class="music-tab-label tab-lbl-freq">Freq</span>
+                        </button>
+                        <button class="music-tab-btn" data-music-tab="ambient" title="Ambient Sounds">
+                            <span class="music-tab-icon">
+                                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path>
+                                </svg>
+                            </span>
+                            <span class="music-tab-label tab-lbl-ambient">Ambient</span>
+                        </button>
+                        <button class="music-tab-btn" data-music-tab="playlist" title="Theme Playlist">
+                            <span class="music-tab-icon">
+                                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M9 18V5l12-2v13"></path>
+                                    <circle cx="6" cy="18" r="3"></circle>
+                                    <circle cx="18" cy="16" r="3"></circle>
+                                </svg>
+                            </span>
+                            <span class="music-tab-label tab-lbl-playlist">Playlist</span>
+                        </button>
+                        <button class="music-tab-btn" data-music-tab="lobby" title="Lobby Music">
+                            <span class="music-tab-icon">
+                                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                                    <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+                                    <line x1="6" y1="1" x2="6" y2="4"></line>
+                                    <line x1="10" y1="1" x2="10" y2="4"></line>
+                                    <line x1="14" y1="1" x2="14" y2="4"></line>
+                                </svg>
+                            </span>
+                            <span class="music-tab-label tab-lbl-lobby">Lobby</span>
+                        </button>
+                        <button class="music-tab-btn" data-music-tab="embed" title="Custom Player">
+                            <span class="music-tab-icon">
+                                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                                </svg>
+                            </span>
+                            <span class="music-tab-label tab-lbl-embed">Custom</span>
+                        </button>
+                    </div>
 
-            <!-- SAĞ PANEL KUTUSU -->
-            <nav class="sidebar right-sidebar glass-panel">
-
-                <!-- Kutu içerisinde ayrı bir menü kutucuğu olarak tanımladık -->
-                <div class="menu-group">
-
-                    <!-- VISUAL THEMES KUTUCUĞU -->
-                    <button class="accordion-btn"> &nbsp; VISUAL THEMES <span class="arrow">▼</span></button>
-                    <div class="accordion-content">
-                        <ul id="themes-list" class="theme-menu-list">
-                            <li onclick="changeTheme('cowboy-era')">&#x21A0; &nbsp; Cowboy Era</li>
-                            <li onclick="changeTheme('cyber-world')">&#x21A0; &nbsp; Cyber World</li>
-                            <li onclick="changeTheme('dark-fantasy')">&#x21A0; &nbsp; Dark Fantasy</li>
-                            <li onclick="changeTheme('light-fantasy')">&#x21A0; &nbsp; Light Fantasy</li>
-                            <li onclick="changeTheme('jazz-romance')">&#x21A0; &nbsp; Jazz & Romance</li>
-                            <li onclick="changeTheme('rock-n-roll')">&#x21A0; &nbsp; Rock n' Roll</li>
+                    <!-- Sekme 1: Canlı Radyo -->
+                    <div class="music-tab-pane active" data-music-tab-content="radio">
+                        <div class="panel-section-title">
+                            <span class="txt-subtab-radio">RADIO STATIONS</span>
+                        </div>
+                        <ul id="radio-stations-list" class="theme-menu-list radio-station-list">
+                            <li class="tab-link" data-radio-station="cowboy-era">
+                                <span>↠ &nbsp; <span class="radio-txt-cowboy">Cowboy & Saloon</span></span>
+                                <span class="live-indicator">LIVE</span>
+                            </li>
+                            <li class="tab-link" data-radio-station="cyber-world">
+                                <span>↠ &nbsp; <span class="radio-txt-cyber">Cyber & Synthwave</span></span>
+                                <span class="live-indicator">LIVE</span>
+                            </li>
+                            <li class="tab-link" data-radio-station="dark-fantasy">
+                                <span>↠ &nbsp; <span class="radio-txt-dark">Dark Fantasy & Ambient</span></span>
+                                <span class="live-indicator">LIVE</span>
+                            </li>
+                            <li class="tab-link" data-radio-station="light-fantasy">
+                                <span>↠ &nbsp; <span class="radio-txt-light">Light Fantasy & Celtic</span></span>
+                                <span class="live-indicator">LIVE</span>
+                            </li>
+                            <li class="tab-link" data-radio-station="jazz-romance">
+                                <span>↠ &nbsp; <span class="radio-txt-jazz">Jazz Romance & Cafe</span></span>
+                                <span class="live-indicator">LIVE</span>
+                            </li>
+                            <li class="tab-link" data-radio-station="rock-n-roll">
+                                <span>↠ &nbsp; <span class="radio-txt-rock">Rock 'n' Roll & Classic</span></span>
+                                <span class="live-indicator">LIVE</span>
+                            </li>
+                            <li class="tab-link" data-radio-station="the-pasific-crest">
+                                <span>↠ &nbsp; <span class="radio-txt-oregon">Welcome to Oregon</span></span>
+                                <span class="live-indicator">LIVE</span>
+                            </li>
+                            <li class="tab-link" data-radio-station="milky-way">
+                                <span>↠ &nbsp; <span class="radio-txt-kawaii">Kawaii Space</span></span>
+                                <span class="live-indicator">LIVE</span>
+                            </li>
                         </ul>
-                    </div>
-                </div>
 
-                <hr class="divider">
-
-                <!-- Kutu içerisinde ayrı bir menü kutucuğu olarak tanımladık -->
-                <div class="menu-group" style="margin-top: 10px;">
-
-                    <!-- AUDIOS KUTUCUĞU -->
-                    <!-- AUDIOS (.accordion-btn) butonuna basınca, onun nextElementSibling dış kutusu (.accordion-content) aktifleşiyor -->
-                    <!-- Dış kutu açılınca bu sefer AMBIENT SOUNDS isimli ikinci bir .accordion-btn çıkıyor. -->
-                    <!-- Ona da basınca, onun altındaki iç kutu (.accordion-content) tetikleniyor accordion sistemi sona eriyor (bu sistemin kodları js'de) -->
-                    <button class="accordion-btn"> &nbsp; AUDIOS <span class="arrow">▼</span></button>
-                    <div class="accordion-content" style="padding-left: 10px; border-left: 2px solid rgba(255,255,255,0.1); margin-left: 5px;">
-                        
-                        <!-- AMBIENT SOUNDS KUTUCUĞU -->
-                        <button class="accordion-btn" style="font-size: 14px; color: #d9d7d7;"> &nbsp; AMBIENT SOUNDS <span class="arrow">▼</span></button>
-                        <div class="accordion-content">
-                            <ul class="theme-menu-list">
-                                <li id="btn-winter-wind" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('winter-wind')">&#x21A0; &nbsp; Winter Wind</li>
-                                <li id="btn-rain" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('rain')">&#x21A0; &nbsp; Rain</li>
-                                <li id="btn-birds" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('birds')">&#x21A0; &nbsp; Birds</li>
-                                <li id="btn-birds-rain" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('birds-rain')">&#x21A0; &nbsp; Birds in the Rain</li>
-                                <li id="btn-waves-seagulls" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('waves-seagulls')">&#x21A0; &nbsp; Waves & Seagulls</li>
-                                <li id="btn-fire" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('fire')">&#x21A0; &nbsp; Fireplace</li>
-                                <li id="btn-cafe-noise" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('cafe-noise')">&#x21A0; &nbsp; Cafe Ambience</li>
-                                <li id="btn-train" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('train')">&#x21A0; &nbsp; Train Journey</li>
-                                <li id="btn-koto-japanese-zither" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('koto-japanese-zither')">&#x21A0; &nbsp; Koto (Japanese Zither)</li>
-                            </ul>
-                            <div class="sidebar-player glass-panel" style="margin-top: 10px;">
-                                <div class="player-controls">
-                                    <button id="btn-sounds-play-pause" class="control-btn play-btn">&#10074;&#10074;</button>
-                                </div>
-                                <div class="credit-divider"></div>
-                                <div class="track-info-mini">
-                                    <span id="sound-credit" class="credit-text" style="color: #00ff88; text-shadow: none;">Play / Pause Active Audio</span>
-                                </div>
+                        <!-- Ortak Stream/Radyo Oynatıcı Çubuğu -->
+                        <div class="sidebar-player glass-panel">
+                            <div class="player-controls">
+                                <button id="btn-player-prev" class="control-btn">&#9668;&#9668;</button>
+                                <button id="btn-player-play-pause" class="control-btn play-btn">&#10074;&#10074;</button>
+                                <button id="btn-player-next" class="control-btn">&#9658;&#9658;</button>
                             </div>
-                        </div>
-
-                        <!-- AMBIENT SOUNDS KUTUCUĞU -->
-                        <button class="accordion-btn"> &nbsp; MUSIC THEMES <span class="arrow">▼</span></button>
-                        <div class="accordion-content">
-                            <ul id="music-themes-list" class="theme-menu-list">
-                                <li class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="playTheme('cowboy-era')">&#x21A0; &nbsp; Cowboy Era</li>
-                                <li class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="playTheme('cyber-world')">&#x21A0; &nbsp; Cyber World</li>
-                                <li class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="playTheme('dark-fantasy')">&#x21A0; &nbsp; Dark Fantasy</li>
-                                <li class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="playTheme('light-fantasy')">&#x21A0; &nbsp; Light Fantasy</li>
-                                <li class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="playTheme('jazz-romance')">&#x21A0; &nbsp; Jazz & Romance</li>
-                                <li class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="playTheme('rock-n-roll')">&#x21A0; &nbsp; Rock n' Roll</li>
-                            </ul>
-                            <div class="sidebar-player glass-panel">
-                                <div class="player-controls">
-                                    <button id="btn-prev" class="control-btn">&#9668;&#9668;</button>
-                                    <button id="btn-play-pause" class="control-btn play-btn">&#10074;&#10074;</button>
-                                    <button id="btn-next" class="control-btn">&#9658;&#9658;</button>
-                                </div>
-                                <div class="credit-divider"></div>
-                                <div class="track-info-mini">
-                                    <span id="track-credit" class="credit-text">Awaiting audio...</span>
-                                </div>
+                            <div style="display: flex; align-items: center; gap: 6px; margin-top: 8px;">
+                                <span style="font-size: 11px; color: #00ff88; font-family: monospace;">VOL</span>
+                                <input type="range" id="player-volume" min="0" max="100" value="50" style="flex: 1; accent-color: #00ff88; cursor: pointer; height: 4px;">
+                            </div>
+                            <div class="track-info-mini">
+                                <span id="player-track-credit" class="credit-text txt-awaiting-audio">Awaiting audio...</span>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Sekme 2: Frekans Sesleri -->
+                    <div class="music-tab-pane" data-music-tab-content="freq">
+                        <div class="panel-section-title">
+                            <span class="txt-subtab-freq">FREQUENCIES</span>
+                        </div>
+                        <ul id="frequency-list" class="theme-menu-list frequency-list">
+                            <li class="tab-link" data-freq-id="432hz">
+                                <span>↠ &nbsp; <span class="freq-txt-432">432Hz Miracle Tone</span></span>
+                                <span class="freq-badge">HEAL</span>
+                            </li>
+                            <li class="tab-link" data-freq-id="528hz">
+                                <span>↠ &nbsp; <span class="freq-txt-528">528Hz Solfeggio Love</span></span>
+                                <span class="freq-badge">DNA</span>
+                            </li>
+                            <li class="tab-link" data-freq-id="alpha">
+                                <span>↠ &nbsp; <span class="freq-txt-alpha">Alpha Waves (10Hz Focus)</span></span>
+                                <span class="freq-badge">MIND</span>
+                            </li>
+                            <li class="tab-link" data-freq-id="theta">
+                                <span>↠ &nbsp; <span class="freq-txt-theta">Theta Waves (6Hz Flow)</span></span>
+                                <span class="freq-badge">ZEN</span>
+                            </li>
+                            <li class="tab-link" data-freq-id="delta">
+                                <span>↠ &nbsp; <span class="freq-txt-delta">Delta Waves (2Hz Sleep)</span></span>
+                                <span class="freq-badge">REST</span>
+                            </li>
+                            <li class="tab-link" data-freq-id="schumann">
+                                <span>↠ &nbsp; <span class="freq-txt-schumann">7.83Hz Earth Resonance</span></span>
+                                <span class="freq-badge">EARTH</span>
+                            </li>
+                        </ul>
+
+                        <div class="sidebar-player glass-panel">
+                            <div class="player-controls">
+                                <button id="btn-freq-prev" class="control-btn">&#9668;&#9668;</button>
+                                <button id="btn-freq-play-pause" class="control-btn play-btn">&#9654;</button>
+                                <button id="btn-freq-next" class="control-btn">&#9658;&#9658;</button>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 6px; margin-top: 8px;">
+                                <span style="font-size: 11px; color: #00ff88; font-family: monospace;">VOL</span>
+                                <input type="range" id="freq-volume" min="0" max="100" value="50" style="flex: 1; accent-color: #00ff88; cursor: pointer; height: 4px;">
+                            </div>
+                            <div class="track-info-mini">
+                                <span id="freq-track-credit" class="credit-text">Web Audio Binaural Generator</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sekme 3: Ambiyans Sesleri -->
+                    <div class="music-tab-pane" data-music-tab-content="ambient">
+                        <div class="panel-section-title">
+                            <span class="txt-ambient-sounds">AMBIENT MIXER</span>
+                        </div>
+                        <ul class="theme-menu-list" id="ambient-sounds-list">
+                            <li id="btn-winter-wind" class="tab-link" data-sound="winter-wind"><span>↠ &nbsp; <span class="snd-txt-winter">Winter Wind</span></span></li>
+                            <li id="btn-rain" class="tab-link" data-sound="rain"><span>↠ &nbsp; <span class="snd-txt-rain">Rain</span></span></li>
+                            <li id="btn-birds" class="tab-link" data-sound="birds"><span>↠ &nbsp; <span class="snd-txt-birds">Birds</span></span></li>
+                            <li id="btn-birds-rain" class="tab-link" data-sound="birds-rain"><span>↠ &nbsp; <span class="snd-txt-birds-rain">Birds in the Rain</span></span></li>
+                            <li id="btn-waves-seagulls" class="tab-link" data-sound="waves-seagulls"><span>↠ &nbsp; <span class="snd-txt-waves">Waves & Seagulls</span></span></li>
+                            <li id="btn-fire" class="tab-link" data-sound="fire"><span>↠ &nbsp; <span class="snd-txt-fire">Fireplace</span></span></li>
+                            <li id="btn-cafe-noise" class="tab-link" data-sound="cafe-noise"><span>↠ &nbsp; <span class="snd-txt-cafe">Cafe Ambience</span></span></li>
+                            <li id="btn-train" class="tab-link" data-sound="train"><span>↠ &nbsp; <span class="snd-txt-train">Train Journey</span></span></li>
+                            <li id="btn-koto-japanese-zither" class="tab-link" data-sound="koto-japanese-zither"><span>↠ &nbsp; <span class="snd-txt-koto">Koto</span></span></li>
+                        </ul>
+                        <div class="sidebar-player glass-panel">
+                            <div class="player-controls">
+                                <button id="btn-sounds-play-pause" class="control-btn play-btn">&#10074;&#10074;</button>
+                            </div>
+                            <div class="track-info-mini">
+                                <span id="sound-credit" class="credit-text" style="color: rgba(255, 255, 255, 0.75); text-shadow: none;">Play / Pause Active Audio</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sekme 4: Tema Listesi -->
+                    <div class="music-tab-pane" data-music-tab-content="playlist">
+                        <div class="panel-section-title" style="display: flex; justify-content: space-between; align-items: center;">
+                            <span>PLAYLIST: <strong id="playlist-theme-name" style="color: #00ff88;">CURRENT THEME</strong></span>
+                            <button id="btn-playlist-shuffle-toggle" class="playlist-shuffle-pill" title="Karışık Çalma / Shuffle">
+                                <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="16 3 21 3 21 8"></polyline>
+                                    <line x1="4" y1="20" x2="21" y2="3"></line>
+                                    <polyline points="21 16 21 21 16 21"></polyline>
+                                    <line x1="15" y1="15" x2="21" y2="21"></line>
+                                    <line x1="4" y1="4" x2="9" y2="9"></line>
+                                </svg>
+                                <span class="txt-shuffle-label">SHUFFLE</span>
+                            </button>
+                        </div>
+                        <div class="sidebar-player glass-panel">
+                            <div class="player-controls">
+                                <button id="btn-playlist-prev" class="control-btn">&#9668;&#9668;</button>
+                                <button id="btn-playlist-play-pause" class="control-btn play-btn">&#10074;&#10074;</button>
+                                <button id="btn-playlist-next" class="control-btn">&#9658;&#9658;</button>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 6px; margin-top: 8px;">
+                                <span style="font-size: 11px; color: #00ff88; font-family: monospace;">VOL</span>
+                                <input type="range" id="playlist-volume" min="0" max="100" value="50" style="flex: 1; accent-color: #00ff88; cursor: pointer; height: 4px;">
+                            </div>
+                            <div class="track-info-mini">
+                                <span id="playlist-track-credit" class="credit-text txt-awaiting-audio">Awaiting audio...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sekme 5: Lobi Müzikleri -->
+                    <div class="music-tab-pane" data-music-tab-content="lobby">
+                        <div class="panel-section-title">
+                            <span class="txt-lobby-music">LOBBY THEMES</span>
+                        </div>
+                        <ul id="lobby-themes-list" class="theme-menu-list lobby-theme-list">
+                            <li class="tab-link" data-lobby-theme="cowboy-era"><span>↠ &nbsp; <span class="lobby-txt-cowboy">Wild West Saloon</span></span></li>
+                            <li class="tab-link" data-lobby-theme="cyber-world"><span>↠ &nbsp; <span class="lobby-txt-cyber">Cyberpunk Skyscraper</span></span></li>
+                            <li class="tab-link" data-lobby-theme="dark-fantasy"><span>↠ &nbsp; <span class="lobby-txt-dark-fan">Cursed Cathedral</span></span></li>
+                            <li class="tab-link" data-lobby-theme="light-fantasy"><span>↠ &nbsp; <span class="lobby-txt-light-fan">Dragon's Sanctuary</span></span></li>
+                            <li class="tab-link" data-lobby-theme="jazz-romance"><span>↠ &nbsp; <span class="lobby-txt-jazz">New York Velvet Jazz</span></span></li>
+                            <li class="tab-link" data-lobby-theme="rock-n-roll"><span>↠ &nbsp; <span class="lobby-txt-rock">Children of Democracy Motor Club</span></span></li>
+                            <li class="tab-link" data-lobby-theme="the-pasific-crest"><span>↠ &nbsp; <span class="lobby-txt-oregon">Welcome to Oregon</span></span></li>
+                            <li class="tab-link" data-lobby-theme="milky-way"><span>↠ &nbsp; <span class="lobby-txt-kawaii">Kawaii Space</span></span></li>
+                        </ul>
+                        <div class="sidebar-player glass-panel">
+                            <div class="player-controls">
+                                <button id="btn-lobby-prev" class="control-btn">&#9668;&#9668;</button>
+                                <button id="btn-lobby-play-pause" class="control-btn play-btn">&#10074;&#10074;</button>
+                                <button id="btn-lobby-next" class="control-btn">&#9658;&#9658;</button>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 6px; margin-top: 8px;">
+                                <span style="font-size: 11px; color: #00ff88; font-family: monospace;">VOL</span>
+                                <input type="range" id="lobby-volume" min="0" max="100" value="50" style="flex: 1; accent-color: #00ff88; cursor: pointer; height: 4px;">
+                            </div>
+                            <div class="track-info-mini">
+                                <span id="lobby-track-credit" class="credit-text txt-awaiting-audio">Awaiting audio...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sekme 6: Özel Bağlantı (Embed) -->
+                    <div class="music-tab-pane" data-music-tab-content="embed">
+                        <div class="panel-section-title">
+                            <span class="txt-subtab-embed">CUSTOM PLAYER</span>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <input type="text" id="embed-url" placeholder="Paste Spotify/YouTube URL..." class="visual-url-input">
+                            <button id="btn-load-embed" class="glass-btn btn-apply-vis" style="width: 100%;">
+                                <span class="btn-txt-load">Load Player</span>
+                            </button>
+                        </div>
+                        <div id="embed-container" style="margin-top: 14px; border-radius: 12px; overflow: hidden; width: 100%;"></div>
+                    </div>
                 </div>
 
-                <hr class="divider" style="margin-top: 25px;">
-                <div style="background: rgba(255, 68, 68, 0.1); border: 1px solid rgba(255, 68, 68, 0.3); padding: 12px; border-radius: 8px; text-align: center;">
-                    <p style="font-size: 12px; color: #ffcccc; margin: 0; line-height: 1.4;">
-                        <strong>Quick Note:</strong> High data usage. Wi-Fi recommended.
-                    </p>
-                </div>
-            </nav>
+                <!-- 2. Görsel Paneli -->
+                <div class="panel-view" data-panel="visual">
+                    <div class="panel-section-title">
+                        <span class="txt-theme-scenes">THEME SCENES</span>
+                    </div>
+                    
+                    <!-- 5 Tema Sahnesi Thumbnail Kartları -->
+                    <div class="theme-scenes-grid" id="theme-scenes-container">
+                        <button class="scene-card active" data-scene="1">
+                            <span class="scene-number">1</span>
+                        </button>
+                        <button class="scene-card" data-scene="2">
+                            <span class="scene-number">2</span>
+                        </button>
+                        <button class="scene-card" data-scene="3">
+                            <span class="scene-number">3</span>
+                        </button>
+                        <button class="scene-card" data-scene="4">
+                            <span class="scene-number">4</span>
+                        </button>
+                        <button class="scene-card" data-scene="5">
+                            <span class="scene-number">5</span>
+                        </button>
+                    </div>
 
-            <!-- BUY ME A COFFEE KUTUSU -->
-            <div class="support-panel-container">
-                <div class="support-content">
-                    <h3>Support Me!</h3>
-        
-                    <a href="https://buymeacoffee.com/ietkose" target="_blank" class="cyber-coffee-btn">
-                        <img src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" alt="Buy me a coffee">
-                        <span>Buy Me a Coffee</span>
-                    </a>
+                    <div class="panel-divider"></div>
+
+                    <div class="panel-section-title">
+                        <span class="txt-custom-visual">CUSTOM VISUAL</span>
+                    </div>
+
+                    <!-- Drag & Drop / Dosya Yükleme Alanı -->
+                    <div id="visual-drop-zone" class="visual-drop-zone">
+                        <svg class="drop-zone-icon" viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <p class="drop-zone-text">
+                            <strong class="txt-drag-drop">Drag & Drop</strong> <span class="txt-file-here">your file here</span><br>
+                            <span class="drop-zone-sub txt-drop-supports">Image, GIF, MP4</span>
+                        </p>
+                        <label for="visual-file-input" class="glass-btn btn-choose-file">
+                            <span class="txt-choose-file">Choose File</span>
+                        </label>
+                        <input type="file" id="visual-file-input" accept="image/*,video/mp4" style="display: none;">
+                    </div>
+
+                    <p class="visual-or-divider txt-or-word">— OR —</p>
+
+                    <!-- URL Yapıştırma -->
+                    <div class="visual-url-box">
+                        <input type="text" id="visual-url" placeholder="Paste Image/GIF/Video URL..." class="visual-url-input">
+                        <div class="visual-btn-row">
+                            <button id="btn-apply-visual" class="glass-btn btn-apply-vis">
+                                <span class="btn-txt-apply">Apply</span>
+                            </button>
+                            <button id="btn-reset-visual" class="glass-btn btn-reset-vis">
+                                <span class="btn-txt-reset-vis">Reset</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Features Paneli -->
+                <div class="panel-view" data-panel="features">
+                    <div class="panel-section-title">
+                        <span class="txt-features-title">FEATURES</span>
+                    </div>
+
+                    <ul class="features-nav-list">
+                        <li class="feature-tab-link active" data-tab="clock-view">
+                            <span class="feat-icon">
+                                <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                </svg>
+                            </span>
+                            <span class="tab-txt-home">Home</span>
+                        </li>
+                        <li class="feature-tab-link" data-tab="stopwatch-view">
+                            <span class="feat-icon">
+                                <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="14" r="8"></circle>
+                                    <line x1="12" y1="14" x2="12" y2="10"></line>
+                                    <line x1="12" y1="2" x2="12" y2="6"></line>
+                                </svg>
+                            </span>
+                            <span class="tab-txt-stopwatch">Stopwatch</span>
+                        </li>
+                        <li class="feature-tab-link" data-tab="timer-view">
+                            <span class="feat-icon">
+                                <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M5 22h14"></path>
+                                    <path d="M5 2h14"></path>
+                                    <path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"></path>
+                                    <path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"></path>
+                                </svg>
+                            </span>
+                            <span class="tab-txt-timer">Timer</span>
+                        </li>
+                        <li class="feature-tab-link" data-tab="pomodoro-view">
+                            <span class="feat-icon">
+                                <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </span>
+                            <span class="tab-txt-pomodoro">Pomodoro</span>
+                        </li>
+                        <li class="feature-tab-link" data-tab="todo-view">
+                            <span class="feat-icon">
+                                <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="9 11 12 14 22 4"></polyline>
+                                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                                </svg>
+                            </span>
+                            <span class="tab-txt-todo">To-Do</span>
+                        </li>
+                        <li class="feature-tab-link" data-tab="alarm-view">
+                            <span class="feat-icon">
+                                <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                                </svg>
+                            </span>
+                            <span class="tab-txt-alarm">Alarm Clock</span>
+                        </li>
+                        <li class="feature-tab-link" data-tab="world-clock-view">
+                            <span class="feat-icon">
+                                <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                </svg>
+                            </span>
+                            <span class="tab-txt-worldclock">World Clock</span>
+                        </li>
+                        <li class="feature-tab-link" data-tab="birth-chart-view">
+                            <span class="feat-icon">
+                                <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                </svg>
+                            </span>
+                            <span class="tab-txt-birthchart">Birth Chart</span>
+                        </li>
+                    </ul>
+
+                    <div class="panel-divider"></div>
+
+                    <div class="panel-section-title">
+                        <span class="txt-preferences-title">PREFERENCES</span>
+                    </div>
+
+                    <!-- Dil Değiştirme (Language Switcher) -->
+                    <div class="settings-row">
+                        <span class="settings-label txt-lang-label">Language</span>
+                        <div class="lang-switch-group">
+                            <button id="btn-lang-tr" class="lang-pill-btn" data-lang="tr">TR</button>
+                            <button id="btn-lang-en" class="lang-pill-btn" data-lang="en">EN</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </aside>
 
-        <!-- Mobilde bulunan ekran döndürme yazısı -->
-        <div id="mobile-vibe-hint">
-            <span class="pulse-icon">✨</span>
-                <p>Set your vibe, then <strong>rotate your device</strong> for the ultimate fullscreen experience.</p>
-        </div>
 
         <!-- Mobilde bulunan menü butonu -->
-        <button id="mobile-menu-btn" class="glass-btn arrow-btn">
-        </button>
+        <button id="mobile-menu-btn" class="glass-btn arrow-btn"></button>
     </div>
 
-    <!-- Ambiyans seslerini loop olarak çağır -->
-    <audio id="bg-player"></audio>
-    <audio id="audio-winter-wind" src="assets/audios/sounds/winter-wind.mp3" loop></audio>
-    <audio id="audio-rain" src="assets/audios/sounds/rain.mp3" loop></audio>
-    <audio id="audio-birds" src="assets/audios/sounds/birds.mp3" loop></audio>
-    <audio id="audio-birds-rain" src="assets/audios/sounds/birds-rain.mp3" loop></audio>
-    <audio id="audio-waves-seagulls" src="assets/audios/sounds/waves-seagulls.mp3" loop></audio>
-    <audio id="audio-fire" src="assets/audios/sounds/fire.mp3" loop></audio>
-    <audio id="audio-cafe-noise" src="assets/audios/sounds/cafe-noise.mp3" loop></audio>
-    <audio id="audio-train" src="assets/audios/sounds/train.mp3" loop></audio>
-    <audio id="audio-koto-japanese-zither" src="assets/audios/sounds/koto-japanese-zither.mp3" loop></audio>
+    <!-- Müzik ve Ambiyans Player Elementleri -->
+    <audio id="bg-player" preload="none"></audio>
+    <audio id="lobby-player" preload="none"></audio>
+    <audio id="radio-player" preload="none"></audio>
+    <audio id="audio-winter-wind" src="assets/audios/sounds/winter-wind.mp3" loop preload="none"></audio>
+    <audio id="audio-rain" src="assets/audios/sounds/rain.mp3" loop preload="none"></audio>
+    <audio id="audio-birds" src="assets/audios/sounds/birds.mp3" loop preload="none"></audio>
+    <audio id="audio-birds-rain" src="assets/audios/sounds/birds-rain.mp3" loop preload="none"></audio>
+    <audio id="audio-waves-seagulls" src="assets/audios/sounds/waves-seagulls.mp3" loop preload="none"></audio>
+    <audio id="audio-fire" src="assets/audios/sounds/fire.mp3" loop preload="none"></audio>
+    <audio id="audio-cafe-noise" src="assets/audios/sounds/cafe-noise.mp3" loop preload="none"></audio>
+    <audio id="audio-train" src="assets/audios/sounds/train.mp3" loop preload="none"></audio>
+    <audio id="audio-koto-japanese-zither" src="assets/audios/sounds/koto-japanese-zither.mp3" loop preload="none"></audio>
 
-    <audio id="audio-alarm" src="assets/audios/alarm/alarm-ringtone.mp3" loop></audio>
+    <audio id="audio-alarm" src="assets/audios/alarm/alarm-ringtone.mp3" loop preload="none"></audio>
 
-    <div style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;">
-        <a href="#stopwatch">Stopwatch</a>
-        <a href="#timer">Timer</a>
-        <a href="#alarm">Alarm</a>
-        <a href="#world-clock">World Clock</a>
-        <a href="#birth-chart">Birth Chart</a>
-        <a href="#visual-themes">Visual Themes</a>
-        <a href="#audios">Audios</a>
-        <a href="#ambient-sounds">Ambient Sounds</a>
-        <a href="#music-themes">Music Themes</a>
-    </div>
-
-    <!-- HTML'i JS'e bağlar ki HTML içerisinde yatan JS mekanizması çalışsın -->
-    <script src="script.js"></script>
-    
+    <script src="script.js?v=20261027_07"></script>
 </body>
 </html>
