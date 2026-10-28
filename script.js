@@ -71,6 +71,7 @@ const translations = {
         bldLight: "Dragon's Sanctuary", bldJazz: "New York Velvet Jazz", bldRock: "Children of Democracy Motor Club",
         bldOregon: "Welcome to Oregon", bldKawaii: "Kawaii Space",
         
+        radioLos40: "LOS40",
         radioCowboy: "Wild West Saloon", radioCyber: "Cyberpunk Skyscraper", radioDark: "Cursed Cathedral",
         radioLight: "Dragon's Sanctuary", radioJazz: "New York Velvet Jazz", radioRock: "Children of Democracy Motor Club",
         radioOregon: "Welcome to Oregon", radioKawaii: "Kawaii Space",
@@ -135,6 +136,7 @@ const translations = {
         bldLight: "Ejderhanın Sığınağı", bldJazz: "New York Kadife Caz", bldRock: "Demokrasinin Çocukları Motor Kulübü",
         bldOregon: "Oregon'a Hoşgeldiniz", bldKawaii: "Tatlış Uzay",
         
+        radioLos40: "LOS40",
         radioCowboy: "Vahşi Batı Salon", radioCyber: "Cyberpunk Gökdelen", radioDark: "Lanetli Katedral",
         radioLight: "Ejderhanın Sığınağı", radioJazz: "New York Kadife Caz", radioRock: "Demokrasinin Çocukları Motor Kulübü",
         radioOregon: "Oregon'a Hoşgeldiniz", radioKawaii: "Tatlış Uzay",
@@ -252,6 +254,7 @@ function applyTranslations() {
     const lOre = document.querySelector('.lobby-txt-oregon'); if (lOre) lOre.innerText = t.bldOregon;
     const lKaw = document.querySelector('.lobby-txt-kawaii'); if (lKaw) lKaw.innerText = t.bldKawaii;
 
+    const rLos = document.querySelector('.radio-txt-los40'); if (rLos) rLos.innerText = t.radioLos40 || 'LOS40';
     const rCow = document.querySelector('.radio-txt-cowboy'); if (rCow) rCow.innerText = t.radioCowboy;
     const rCyb = document.querySelector('.radio-txt-cyber'); if (rCyb) rCyb.innerText = t.radioCyber;
     const rDar = document.querySelector('.radio-txt-dark'); if (rDar) rDar.innerText = t.radioDark;
@@ -1556,8 +1559,14 @@ class AudioManager {
         this.freqKeys = Object.keys(this.frequencies);
         this.currentFreqIndex = 0;
 
-        // Canlı Radyo İstasyonları (Temalara Özel Canlı Stream URL'leri)
+        // Canlı Radyo İstasyonları (Temalara Özel Canlı Stream URL'leri + LOS40)
         this.radioStations = {
+            'los40': {
+                id: 'los40',
+                name: { en: 'LOS40', tr: 'LOS40' },
+                url: 'https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40.mp3',
+                credit: { en: 'Live: LOS40 España (Todos Los Éxitos)', tr: 'Canlı: LOS40 İspanya (Popüler Hit Müzik)' }
+            },
             'cowboy-era': {
                 id: 'cowboy-era',
                 name: { en: 'Wild West Saloon', tr: 'Kovboy & Saloon' },
@@ -1607,8 +1616,8 @@ class AudioManager {
                 credit: { en: 'Live: SomaFM Mission Control (Space)', tr: 'Canlı: SomaFM Mission Control (Uzay)' }
             }
         };
-        // 8 ana tema istasyonunun anahtar dizisi
-        this.radioKeys = ['cowboy-era', 'cyber-world', 'dark-fantasy', 'light-fantasy', 'jazz-romance', 'rock-n-roll', 'the-pasific-crest', 'milky-way'];
+        // Canlı radyo istasyonlarının anahtar dizisi
+        this.radioKeys = ['los40', 'cowboy-era', 'cyber-world', 'dark-fantasy', 'light-fantasy', 'jazz-romance', 'rock-n-roll', 'the-pasific-crest', 'milky-way'];
         // Geriye dönük uyumluluk takma adları (backward compatibility aliases)
         this.radioStations['lofi'] = this.radioStations['cowboy-era'];
         this.radioStations['synthwave'] = this.radioStations['cyber-world'];
