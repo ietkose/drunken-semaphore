@@ -38,7 +38,7 @@ function normalizeTheme(themeName) {
 
 const translations = {
     'en': {
-        fullscreen: "⛶ Fullscreen", minimize: "⛶ Minimize",
+        fullscreen: "Fullscreen", minimize: "Minimize",
         home: "Home", stopwatch: "Stopwatch", timer: "Timer", pomodoro: "Pomodoro", todo: "To-Do", alarm: "Alarm Clock", worldclock: "World Clock", birthchart: "Birth Chart",
         start: "Start", stop: "Stop", lap: "Lap", reset: "Reset", pause: "Pause / Stop", set: "Set", cancel: "Cancel", add: "+ Add", load: "Load Player",
         noAlarm: "No Alarm Set", snooze: "Snooze (5 min)", dismiss: "Dismiss", calc: "Calculate",
@@ -116,7 +116,7 @@ const translations = {
         rotateForConsole: "Rotate to portrait for console",
     },
     'tr': {
-        fullscreen: "⛶ Tam Ekran", minimize: "⛶ Küçült",
+        fullscreen: "Tam Ekran", minimize: "Küçült",
         home: "Ana Sayfa", stopwatch: "Kronometre", timer: "Sayaç", pomodoro: "Pomodoro", todo: "Yapılacaklar", alarm: "Alarm", worldclock: "Dünya Saati", birthchart: "Doğum Haritası",
         start: "Başlat", stop: "Durdur", lap: "Tur", reset: "Sıfırla", pause: "Duraklat / Bitir", set: "Kur", cancel: "İptal", add: "+ Ekle", load: "Oynatıcıyı Yükle",
         noAlarm: "Alarm Kurulmadı", snooze: "Ertele (5 dk)", dismiss: "Kapat", calc: "Hesapla",
@@ -1135,33 +1135,34 @@ class AstrologyManager {
 
     getSunSign(d, m) {
         const isTr = currentLang === 'tr';
-        if((m==1&&d<=20)||(m==12&&d>=22)) return isTr ? "Oğlak ♑" : "Capricorn ♑";
-        if((m==1&&d>=21)||(m==2&&d<=18)) return isTr ? "Kova ♒" : "Aquarius ♒";
-        if((m==2&&d>=19)||(m==3&&d<=20)) return isTr ? "Balık ♓" : "Pisces ♓";
-        if((m==3&&d>=21)||(m==4&&d<=19)) return isTr ? "Koç ♈" : "Aries ♈";
-        if((m==4&&d>=20)||(m==5&&d<=20)) return isTr ? "Boğa ♉" : "Taurus ♉";
-        if((m==5&&d>=21)||(m==6&&d<=20)) return isTr ? "İkizler ♊" : "Gemini ♊";
-        if((m==6&&d>=21)||(m==7&&d<=22)) return isTr ? "Yengeç ♋" : "Cancer ♋";
-        if((m==7&&d>=23)||(m==8&&d<=22)) return isTr ? "Aslan ♌" : "Leo ♌";
-        if((m==8&&d>=23)||(m==9&&d<=22)) return isTr ? "Başak ♍" : "Virgo ♍";
-        if((m==9&&d>=23)||(m==10&&d<=22)) return isTr ? "Terazi ♎" : "Libra ♎";
-        if((m==10&&d>=23)||(m==11&&d<=21)) return isTr ? "Akrep ♏" : "Scorpio ♏";
-        return isTr ? "Yay ♐" : "Sagittarius ♐";
+        if((m==1&&d<=20)||(m==12&&d>=22)) return isTr ? "Oğlak" : "Capricorn";
+        if((m==1&&d>=21)||(m==2&&d<=18)) return isTr ? "Kova" : "Aquarius";
+        if((m==2&&d>=19)||(m==3&&d<=20)) return isTr ? "Balık" : "Pisces";
+        if((m==3&&d>=21)||(m==4&&d<=19)) return isTr ? "Koç" : "Aries";
+        if((m==4&&d>=20)||(m==5&&d<=20)) return isTr ? "Boğa" : "Taurus";
+        if((m==5&&d>=21)||(m==6&&d<=20)) return isTr ? "İkizler" : "Gemini";
+        if((m==6&&d>=21)||(m==7&&d<=22)) return isTr ? "Yengeç" : "Cancer";
+        if((m==7&&d>=23)||(m==8&&d<=22)) return isTr ? "Aslan" : "Leo";
+        if((m==8&&d>=23)||(m==9&&d<=22)) return isTr ? "Başak" : "Virgo";
+        if((m==9&&d>=23)||(m==10&&d<=22)) return isTr ? "Terazi" : "Libra";
+        if((m==10&&d>=23)||(m==11&&d<=21)) return isTr ? "Akrep" : "Scorpio";
+        return isTr ? "Yay" : "Sagittarius";
     }
 
     getElement(sign) {
         const isTr = currentLang === 'tr';
-        if(sign.includes("♈") || sign.includes("♌") || sign.includes("♐")) return isTr ? "Ateş 🔥" : "Fire 🔥";
-        if(sign.includes("♉") || sign.includes("♍") || sign.includes("♑")) return isTr ? "Toprak 🌿" : "Earth 🌿";
-        if(sign.includes("♊") || sign.includes("♎") || sign.includes("♒")) return isTr ? "Hava 💨" : "Air 💨";
-        return isTr ? "Su 💧" : "Water 💧";
+        const s = sign.toLowerCase();
+        if(s.includes("koç") || s.includes("koc") || s.includes("aries") || s.includes("aslan") || s.includes("leo") || s.includes("yay") || s.includes("sagittarius")) return isTr ? "Ateş" : "Fire";
+        if(s.includes("boğa") || s.includes("boga") || s.includes("taurus") || s.includes("başak") || s.includes("basak") || s.includes("virgo") || s.includes("oğlak") || s.includes("oglak") || s.includes("capricorn")) return isTr ? "Toprak" : "Earth";
+        if(s.includes("ikizler") || s.includes("gemini") || s.includes("terazi") || s.includes("libra") || s.includes("kova") || s.includes("aquarius")) return isTr ? "Hava" : "Air";
+        return isTr ? "Su" : "Water";
     }
 
     getChineseZodiac(year, month, day) {
         const isTr = currentLang === 'tr';
         let cYear = (month === 1 || (month === 2 && day <= 4)) ? year - 1 : year;
-        const animalsEn = ["Rat 🐁", "Ox 🐂", "Tiger 🐅", "Rabbit 🐇", "Dragon 🐉", "Snake 🐍", "Horse 🐎", "Goat 🐐", "Monkey 🐒", "Rooster 🐓", "Dog 🐕", "Pig 🐖"];
-        const animalsTr = ["Fare 🐁", "Öküz 🐂", "Kaplan 🐅", "Tavşan 🐇", "Ejderha 🐉", "Yılan 🐍", "At 🐎", "Keçi 🐐", "Maymun 🐒", "Horoz 🐓", "Köpek 🐕", "Domuz 🐖"];
+        const animalsEn = ["Rat", "Ox", "Tiger", "Rabbit", "Dragon", "Snake", "Horse", "Goat", "Monkey", "Rooster", "Dog", "Pig"];
+        const animalsTr = ["Fare", "Öküz", "Kaplan", "Tavşan", "Ejderha", "Yılan", "At", "Keçi", "Maymun", "Horoz", "Köpek", "Domuz"];
         let index = (cYear - 4) % 12;
         if (index < 0) index += 12;
         return isTr ? animalsTr[index] : animalsEn[index];
@@ -1193,8 +1194,8 @@ class AstrologyManager {
         b = Math.round(jd * 8);
         if (b >= 8) b = 0; 
         
-        const phasesEn = ["New Moon 🌑", "Waxing Crescent 🌒", "First Quarter 🌓", "Waxing Gibbous 🌔", "Full Moon 🌕", "Waning Gibbous 🌖", "Last Quarter 🌗", "Waning Crescent 🌘"];
-        const phasesTr = ["Yeni Ay 🌑", "İlk Hilal 🌒", "İlk Dördün 🌓", "Büyüyen Ay 🌔", "Dolunay 🌕", "Küçülen Ay 🌖", "Son Dördün 🌗", "Son Hilal 🌘"];
+        const phasesEn = ["New Moon", "Waxing Crescent", "First Quarter", "Waxing Gibbous", "Full Moon", "Waning Gibbous", "Last Quarter", "Waning Crescent"];
+        const phasesTr = ["Yeni Ay", "İlk Hilal", "İlk Dördün", "Büyüyen Ay", "Dolunay", "Küçülen Ay", "Son Dördün", "Son Hilal"];
         return isTr ? phasesTr[b] : phasesEn[b];
     }
 }
@@ -2926,7 +2927,7 @@ class TodoManager {
                        style="accent-color: #00ff88; width: 16px; height: 16px; cursor: pointer;">
                 <span style="flex: 1; font-size: 13px;">${t.text}</span>
                 <button class="todo-remove-btn" data-id="${t.id}" 
-                        style="background: none; border: none; color: #ff4444; cursor: pointer; font-size: 15px;">✕</button>
+                        style="background: none; border: none; color: #ff4444; cursor: pointer; font-size: 15px;">&times;</button>
             </li>
         `).join('');
 
@@ -3136,7 +3137,7 @@ function loadEmbed() {
                     referrerpolicy="strict-origin-when-cross-origin"
                     allowfullscreen style="border-radius: 12px; display: block; border: 1px solid rgba(255,255,255,0.15);"></iframe>
                 <p style="font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 6px; text-align: center;">
-                    ${currentLang === 'tr' ? 'Bazı YouTube videoları kanal sahibi tarafından gömmeye kapatılmış olabilir (Hata 150/153).' : '⚠️ Some YouTube videos may have embedding disabled by the owner (Error 150/153).'}
+                    ${currentLang === 'tr' ? 'Bazı YouTube videoları kanal sahibi tarafından gömmeye kapatılmış olabilir (Hata 150/153).' : 'Note: Some YouTube videos may have embedding disabled by the owner (Error 150/153).'}
                 </p>
             `;
         } else {
