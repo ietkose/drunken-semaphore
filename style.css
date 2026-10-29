@@ -3755,7 +3755,7 @@ body.video-active {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     background: #06080c !important;
     background-color: #06080c !important;
@@ -3868,30 +3868,28 @@ body.video-active {
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
 }
 
-/* Ana İçerik Sahnesi (3'lü Grid: Sol Flank, Orta Saat & Buton, Sağ Flank - Dikeyde ve Yatayda Tam Ortalanmış) */
+/* Ana İçerik Sahnesi (3'lü Grid: Sol Flank, Orta Saat & Buton, Sağ Flank) */
 .ext-main-stage {
     position: relative;
-    top: 0;
+    top: clamp(85px, 12vh, 125px);
     z-index: 10;
     width: 100%;
-    max-width: 1280px;
-    margin: auto;
+    max-width: 1380px;
+    margin: auto 0;
     padding: 0 36px;
     box-sizing: border-box;
     display: grid;
-    grid-template-columns: 250px 1fr 250px;
-    align-items: stretch;
+    grid-template-columns: 240px 1fr 240px;
+    align-items: end;
     justify-items: center;
-    gap: 48px;
+    gap: 40px;
 }
 
 .ext-side-flank {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: 12px;
+    gap: 10px; /* 6 kartın dikeyde kusursuz ve dengeli dizilimi */
     width: 100%;
-    height: 100%;
 }
 
 /* Hızlı Link Kartları (Obsidyen Zemin + Kırmızıdan Yeşile Geçişli Kenarlık) */
@@ -4062,32 +4060,31 @@ body.video-active {
     transition: all 0.25s ease;
 }
 
-/* Orta Bölge: Üstte Saat & Tarih, Altta DRUNKEN SEMAPHORE Bağlantısı - İki Uca Yayılmış (space-between) */
+/* Orta Bölge: 1. Orta Üst Saat & Tarih, 2. Orta Orta ATMOSPHERE Animasyonu & Bağlantı, 3. Orta Alt GOOGLE Bağlantı */
 .ext-center-flank {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    height: 100%;
+    justify-content: flex-end;
+    align-self: end;
     text-align: center;
     width: 100%;
     max-width: 620px;
-    box-sizing: border-box;
+    gap: 22px;
 }
 
-/* 1. ORTA ÜST: Büyük Dijital Saat ve Tarih - Üst Link Başlangıcıyla Hizalı */
+/* 1. ORTA ÜST: Büyük Dijital Saat ve Tarih */
 .ext-clock-hub {
-    position: relative;
-    top: auto;
-    left: auto;
-    transform: none;
+    position: absolute;
+    top: clamp(90px, 12vh, 125px);
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 15;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 0;
-    padding: 0;
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
@@ -4186,9 +4183,76 @@ body.video-active {
     animation: spin3D 7s linear infinite !important;
 }
 
+/* 3. ORTA ALT: Şık Google Hızlı Bağlantısı (Drunken Semaphore Kutusuna Uyumlu Uzun Bar) */
+.ext-center-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
 
+.ext-center-google-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 410px !important;
+    max-width: min(92vw, 440px) !important;
+    height: 48px;
+    padding: 0 20px !important;
+    border-radius: 16px !important;
+    background: rgba(14, 16, 22, 0.72) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.22) !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 24px rgba(255, 255, 255, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    color: #e6edf3;
+    text-decoration: none;
+    box-sizing: border-box !important;
+    transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    cursor: pointer;
+}
 
-/* Mobil Gorunum: Sol kanat linkleri dikey siralanir */
+/* Arka planda zarif beyaz isiklandirma / parlak cam efekti */
+.ext-center-google-link:hover {
+    background: rgba(22, 26, 36, 0.88) !important;
+    border-color: rgba(255, 255, 255, 0.55) !important;
+    transform: translateY(-2px) scale(1.01) !important;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.75), 0 0 35px rgba(255, 255, 255, 0.38), 0 0 12px rgba(255, 255, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
+    color: #ffffff;
+}
+
+.ext-google-icon {
+    display: block;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.ext-google-btn-text {
+    font-size: 13.5px;
+    font-weight: 500;
+    letter-spacing: 0.6px;
+    color: #f1f5f9;
+}
+
+.ext-center-google-link .ext-google-btn-arrow {
+    color: rgba(255, 255, 255, 0.45);
+    transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.ext-center-google-link:hover .ext-google-btn-arrow {
+    color: #ffffff;
+    transform: translate(2px, -2px);
+}
+
+.ext-btn-google:hover .ext-google-arrow {
+    color: #ffffff;
+    transform: translate(2px, -2px);
+}
+
+/* Mobil Görünüm: Soldan 3 link + Sağdan 3 link = Toplam 6 link alt alta sıralanır */
 .extension-screen {
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
@@ -4214,12 +4278,12 @@ body.video-active {
         -webkit-overflow-scrolling: touch !important;
         display: flex !important;
         flex-direction: column !important;
-        justify-content: center !important;
+        justify-content: flex-start !important;
         align-items: center !important;
         min-height: 100dvh !important;
         height: 100dvh !important;
         padding-top: max(20px, env(safe-area-inset-top, 20px)) !important;
-        padding-bottom: max(30px, env(safe-area-inset-bottom, 20px)) !important;
+        padding-bottom: max(60px, calc(env(safe-area-inset-bottom, 20px) + 40px)) !important;
         box-sizing: border-box !important;
         scrollbar-width: none !important;
         -ms-overflow-style: none !important;
@@ -4237,8 +4301,8 @@ body.video-active {
         top: auto !important;
         left: auto !important;
         transform: none !important;
-        margin: 0 0 12px 0 !important;
-        padding: 0 !important;
+        margin-top: auto !important;
+        margin-bottom: 12px !important;
     }
 
     .ext-main-stage {
@@ -4249,7 +4313,7 @@ body.video-active {
         align-items: center !important;
         gap: 8px !important;
         padding: 0 20px !important;
-        margin: auto !important;
+        margin: 0 auto auto auto !important;
         width: 100% !important;
         max-width: 360px !important;
         box-sizing: border-box !important;
@@ -4271,7 +4335,6 @@ body.video-active {
         align-items: center !important;
         justify-content: flex-start !important;
         width: 100% !important;
-        height: auto !important;
         gap: 8px !important;
     }
 
@@ -4306,7 +4369,14 @@ body.video-active {
         transform-style: flat !important;
     }
 
-
+    .ext-center-google-link {
+        width: 100% !important;
+        max-width: 340px !important;
+        height: 44px !important;
+        padding: 0 16px !important;
+        border-radius: 14px !important;
+        font-size: 13px !important;
+    }
 
     .ext-header {
         padding: 16px 20px !important;
@@ -4358,11 +4428,10 @@ body.video-active {
 }
 
 .ext-clock-hub {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    transform: none !important;
-    margin: 0 !important;
+    position: absolute;
+    top: clamp(90px, 12vh, 125px) !important;
+    left: 50%;
+    transform: translateX(-50%);
     padding: 0 !important;
     border-radius: 0 !important;
     background: transparent !important;
