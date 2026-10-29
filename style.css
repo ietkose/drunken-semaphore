@@ -4214,12 +4214,12 @@ body.video-active {
         -webkit-overflow-scrolling: touch !important;
         display: flex !important;
         flex-direction: column !important;
-        justify-content: flex-start !important;
+        justify-content: center !important;
         align-items: center !important;
         min-height: 100dvh !important;
         height: 100dvh !important;
         padding-top: max(20px, env(safe-area-inset-top, 20px)) !important;
-        padding-bottom: max(60px, calc(env(safe-area-inset-bottom, 20px) + 40px)) !important;
+        padding-bottom: max(30px, env(safe-area-inset-bottom, 20px)) !important;
         box-sizing: border-box !important;
         scrollbar-width: none !important;
         -ms-overflow-style: none !important;
@@ -4237,8 +4237,8 @@ body.video-active {
         top: auto !important;
         left: auto !important;
         transform: none !important;
-        margin-top: auto !important;
-        margin-bottom: 12px !important;
+        margin: 0 0 12px 0 !important;
+        padding: 0 !important;
     }
 
     .ext-main-stage {
@@ -4249,7 +4249,7 @@ body.video-active {
         align-items: center !important;
         gap: 8px !important;
         padding: 0 20px !important;
-        margin: 0 auto auto auto !important;
+        margin: auto !important;
         width: 100% !important;
         max-width: 360px !important;
         box-sizing: border-box !important;
