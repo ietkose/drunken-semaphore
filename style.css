@@ -3755,7 +3755,7 @@ body.video-active {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     background: #06080c !important;
     background-color: #06080c !important;
@@ -3868,28 +3868,30 @@ body.video-active {
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
 }
 
-/* Ana İçerik Sahnesi (3'lü Grid: Sol Flank, Orta Saat & Buton, Sağ Flank) */
+/* Ana İçerik Sahnesi (3'lü Grid: Sol Flank, Orta Saat & Buton, Sağ Flank - Dikeyde ve Yatayda Tam Ortalanmış) */
 .ext-main-stage {
     position: relative;
-    top: clamp(85px, 12vh, 125px);
+    top: 0;
     z-index: 10;
     width: 100%;
-    max-width: 1380px;
-    margin: auto 0;
+    max-width: 1280px;
+    margin: auto;
     padding: 0 36px;
     box-sizing: border-box;
     display: grid;
-    grid-template-columns: 240px 1fr 240px;
-    align-items: end;
+    grid-template-columns: 250px 1fr 250px;
+    align-items: stretch;
     justify-items: center;
-    gap: 40px;
+    gap: 48px;
 }
 
 .ext-side-flank {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* 6 kartın dikeyde kusursuz ve dengeli dizilimi */
+    justify-content: space-between;
+    gap: 12px;
     width: 100%;
+    height: 100%;
 }
 
 /* Hızlı Link Kartları (Obsidyen Zemin + Kırmızıdan Yeşile Geçişli Kenarlık) */
@@ -4060,31 +4062,32 @@ body.video-active {
     transition: all 0.25s ease;
 }
 
-/* Orta Bölge: 1. Orta Üst Saat & Tarih, 2. Orta Orta ATMOSPHERE Animasyonu & Bağlantı, 3. Orta Alt GOOGLE Bağlantı */
+/* Orta Bölge: Üstte Saat & Tarih, Altta DRUNKEN SEMAPHORE Bağlantısı - İki Uca Yayılmış (space-between) */
 .ext-center-flank {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end;
-    align-self: end;
+    justify-content: space-between;
+    height: 100%;
     text-align: center;
     width: 100%;
     max-width: 620px;
-    gap: 22px;
+    box-sizing: border-box;
 }
 
-/* 1. ORTA ÜST: Büyük Dijital Saat ve Tarih */
+/* 1. ORTA ÜST: Büyük Dijital Saat ve Tarih - Üst Link Başlangıcıyla Hizalı */
 .ext-clock-hub {
-    position: absolute;
-    top: clamp(90px, 12vh, 125px);
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
     z-index: 15;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 0;
+    padding: 0;
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
@@ -4335,6 +4338,7 @@ body.video-active {
         align-items: center !important;
         justify-content: flex-start !important;
         width: 100% !important;
+        height: auto !important;
         gap: 8px !important;
     }
 
@@ -4428,10 +4432,11 @@ body.video-active {
 }
 
 .ext-clock-hub {
-    position: absolute;
-    top: clamp(90px, 12vh, 125px) !important;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    margin: 0 !important;
     padding: 0 !important;
     border-radius: 0 !important;
     background: transparent !important;
