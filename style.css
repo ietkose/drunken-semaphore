@@ -1349,7 +1349,7 @@ body.fullscreen-mode .right-wrapper {
     opacity: 0 !important; 
 }
 
-body.fullscreen-mode .main-content { margin-left: 0 !important; margin-right: 0 !important; }
+body.fullscreen-mode .main-content { margin: 0 !important; padding: 0 !important; width: 100vw !important; }
 
 body.panel-open .main-content {
     margin-right: 340px;
@@ -1472,28 +1472,68 @@ body.panel-open .main-content {
 ------------------------------------------- */
 body.fullscreen-mode .left-wrapper { transform: translateX(-100%); opacity: 0; position: absolute; pointer-events: none; }
 body.fullscreen-mode .right-wrapper { transform: translateX(100%); opacity: 0; position: absolute; pointer-events: none; }
-body.fullscreen-mode .app-container { background: transparent; }
+body.fullscreen-mode .app-container { 
+    background: transparent !important; 
+    justify-content: center !important; 
+    align-items: center !important; 
+    margin: 0 !important; 
+    padding: 0 !important; 
+    width: 100vw !important; 
+}
 
-/* PC ve masaüstünde tam ekran: Kutunun sınırları ve cam zemini görünmez olur, sadece içerik orta/alt'a konumlanır */
+/* PC ve masaüstünde tam ekran: Kutunun sınırları ve cam zemini görünmez olur, içerik tam ortaya (center) konumlanır */
 @media (min-width: 951px) {
     body.fullscreen-mode .main-content {
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
-        width: 100% !important;
-        height: 100% !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        margin: 0 !important;
+        padding: 0 !important;
         position: relative !important;
+        box-sizing: border-box !important;
     }
 
     body.fullscreen-mode .view-box {
+        display: none !important;
+    }
+
+    body.fullscreen-mode .view-box[style*="none"] {
+        display: none !important;
+    }
+
+    body.fullscreen-mode #clock-view:not([style*="display: none"]):not(.hidden),
+    body.fullscreen-mode #stopwatch-view:not([style*="display: none"]):not(.hidden),
+    body.fullscreen-mode #timer-view:not([style*="display: none"]):not(.hidden),
+    body.fullscreen-mode #pomodoro-view:not([style*="display: none"]):not(.hidden),
+    body.fullscreen-mode #todo-view:not([style*="display: none"]):not(.hidden),
+    body.fullscreen-mode #alarm-view:not([style*="display: none"]):not(.hidden),
+    body.fullscreen-mode #world-clock-view:not([style*="display: none"]):not(.hidden),
+    body.fullscreen-mode #birth-chart-view:not([style*="display: none"]):not(.hidden),
+    body.fullscreen-mode .view-box[style*="block"]:not(.hidden),
+    body.fullscreen-mode .view-box[style*="flex"]:not(.hidden) {
         position: absolute !important;
         bottom: 8% !important;
+        left: 50% !important;
+        top: auto !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
         background: transparent !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
         border: none !important;
         box-shadow: none !important;
-        transform: scale(1.1) !important;
+        width: max-content !important;
+        max-width: 90vw !important;
+        box-sizing: border-box !important;
     }
 }
 
@@ -2453,6 +2493,14 @@ body.video-active {
 
 #bg-video.visible {
     opacity: 1 !important;
+}
+
+#bg-video.hidden,
+#bg-video[style*="display: none"],
+#bg-video[style*="opacity: 0"] {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
 }
 
 /* 3. Volume Sliders */
@@ -4735,3 +4783,57 @@ input[type="range"]::-moz-range-thumb {
 
 
 
+
+/* ------------------------------------------
+   GHOST FADE HINT: HARİTADAN YATAY GİRİŞ İPUCU
+   ------------------------------------------ */
+.cinema-rotate-hint {
+    position: fixed;
+    bottom: 22px;
+    right: 24px;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: rgba(12, 16, 26, 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 12px rgba(0, 255, 136, 0.15);
+    border-radius: 30px;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.cinema-rotate-hint.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.cinema-rotate-hint.fade-out {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.cinema-rotate-icon {
+    color: #00ff88;
+    animation: rotatePhonePulse 2.2s ease-in-out infinite;
+}
+
+@keyframes rotatePhonePulse {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(-35deg);
+    }
+}

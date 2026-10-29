@@ -72,19 +72,23 @@ const translations = {
         bldOregon: "Welcome to Oregon", bldKawaii: "Kawaii Space",
         
         radioLos40: "LOS40",
-        radioRadioX: "Radio X (Indie Rock)",
+        radioTrtRadyo3: "TRT Radyo 3",
+        radioChanteFrance: "Chante France",
+        radioFlashFm: "Flash FM",
+        radioLagosJump: "LagosJump Radio",
+        radioRadioX: "Radio X",
         radioCapitalFm: "Capital FM",
         radioAsiaDream: "Asia DREAM Radio",
         radioKexp: "KEXP 90.3 FM",
         radioRadioParadise: "Radio Paradise",
-        radioFipParis: "FIP Paris",
+        radioFipParis: "FIP",
         radioPowerFm: "Power FM",
         radioClassicFm: "Classic FM",
-        radioTrtRadyo3: "Radio X (Indie Rock)", radioBbcWorld: "Radio X (Indie Rock)", radioNtsRadio: "Asia DREAM Radio",
-        radioCowboy: "Radio X (Indie Rock)", radioCyber: "Capital FM", radioDark: "Radio Paradise",
-        radioLight: "FIP Paris", radioJazz: "Classic FM", radioRock: "Radio X (Indie Rock)",
+        radioBbcWorld: "Radio X", radioNtsRadio: "Asia DREAM Radio",
+        radioCowboy: "Radio X", radioCyber: "Flash FM", radioDark: "Radio Paradise",
+        radioLight: "Chante France", radioJazz: "TRT Radyo 3", radioRock: "Radio X",
         radioOregon: "Classic FM", radioKawaii: "Asia DREAM Radio",
-        radioLofi: "Radio X (Indie Rock)", radioSynth: "Capital FM", radioSpace: "Radio Paradise", radioPiano: "FIP Paris",
+        radioLofi: "Chante France", radioSynth: "Flash FM", radioSpace: "Radio Paradise", radioPiano: "FIP Paris",
         radioConnecting: "Connecting to station...", radioErrorFallback: "Stream unavailable",
         
         mapSubtitle: "CHOOSE YOUR VIBE", mapExplore: "EXPLORE", hudEnter: "Enter", hudTapEnter: "Tap to Enter",
@@ -109,7 +113,8 @@ const translations = {
         orientRoomTitle: "PORTRAIT CONSOLE",
         orientRoomDesc: "The console is designed for portrait. Please rotate your device to portrait or enter fullscreen mode.",
         orientCinemaTitle: "CINEMATIC MODE",
-        orientCinemaDesc: "Cinematic mode is designed for landscape. Please rotate your device to landscape."
+        orientCinemaDesc: "Cinematic mode is designed for landscape. Please rotate your device to landscape.",
+        rotateForConsole: "Rotate to portrait for console",
     },
     'tr': {
         fullscreen: "⛶ Tam Ekran", minimize: "⛶ Küçült",
@@ -146,19 +151,23 @@ const translations = {
         bldOregon: "Oregon'a Hoşgeldiniz", bldKawaii: "Tatlış Uzay",
         
         radioLos40: "LOS40",
-        radioRadioX: "Radio X (Indie Rock)",
+        radioTrtRadyo3: "TRT Radyo 3",
+        radioChanteFrance: "Chante France",
+        radioFlashFm: "Flash FM",
+        radioLagosJump: "LagosJump Radio",
+        radioRadioX: "Radio X",
         radioCapitalFm: "Capital FM",
         radioAsiaDream: "Asia DREAM Radio",
         radioKexp: "KEXP 90.3 FM",
         radioRadioParadise: "Radio Paradise",
-        radioFipParis: "FIP Paris",
+        radioFipParis: "FIP",
         radioPowerFm: "Power FM",
         radioClassicFm: "Classic FM",
-        radioTrtRadyo3: "Radio X (Indie Rock)", radioBbcWorld: "Radio X (Indie Rock)", radioNtsRadio: "Asia DREAM Radio",
-        radioCowboy: "Radio X (Indie Rock)", radioCyber: "Capital FM", radioDark: "Radio Paradise",
-        radioLight: "FIP Paris", radioJazz: "Classic FM", radioRock: "Radio X (Indie Rock)",
+        radioBbcWorld: "Radio X", radioNtsRadio: "Asia DREAM Radio",
+        radioCowboy: "Radio X", radioCyber: "Flash FM", radioDark: "Radio Paradise",
+        radioLight: "Chante France", radioJazz: "TRT Radyo 3", radioRock: "Radio X",
         radioOregon: "Classic FM", radioKawaii: "Asia DREAM Radio",
-        radioLofi: "Radio X (Indie Rock)", radioSynth: "Capital FM", radioSpace: "Radio Paradise", radioPiano: "FIP Paris",
+        radioLofi: "Chante France", radioSynth: "Flash FM", radioSpace: "Radio Paradise", radioPiano: "FIP Paris",
         radioConnecting: "İstasyona bağlanıyor...", radioErrorFallback: "Yayın açılamadı",
 
         mapSubtitle: "MEKANINI SEÇ", mapExplore: "KEŞFET", hudEnter: "Giriş Yap", hudTapEnter: "Giriş İçin Dokun",
@@ -183,7 +192,8 @@ const translations = {
         orientRoomTitle: "DİKEY KONSOL",
         orientRoomDesc: "Konsol görünümü dikey kullanım için tasarlanmıştır. Lütfen cihazınızı dikey konuma getirin veya tam ekran moduna geçin.",
         orientCinemaTitle: "SİNEMATİK MOD",
-        orientCinemaDesc: "Sinematik tam ekran modu yatay kullanım için tasarlanmıştır. Lütfen cihazınızı yatay konuma getirin."
+        orientCinemaDesc: "Sinematik tam ekran modu yatay kullanım için tasarlanmıştır. Lütfen cihazınızı yatay konuma getirin.",
+        rotateForConsole: "Konsol için dikey çevirin",
     }
 };
 
@@ -199,6 +209,7 @@ function applyTranslations() {
     const oRoomD = document.querySelector('.txt-orient-room-desc'); if (oRoomD && t.orientRoomDesc) oRoomD.innerText = t.orientRoomDesc;
     const oCinT = document.querySelector('.txt-orient-cinema-title'); if (oCinT && t.orientCinemaTitle) oCinT.innerText = t.orientCinemaTitle;
     const oCinD = document.querySelector('.txt-orient-cinema-desc'); if (oCinD && t.orientCinemaDesc) oCinD.innerText = t.orientCinemaDesc;
+    const rHint = document.querySelector('.txt-rotate-for-console'); if (rHint && t.rotateForConsole) rHint.innerText = t.rotateForConsole;
 
     const gA = document.querySelector('.txt-guide-a'); if (gA && t.guideA) gA.innerText = t.guideA;
     const gB = document.querySelector('.txt-guide-b'); if (gB && t.guideB) gB.innerText = t.guideB;
@@ -273,7 +284,11 @@ function applyTranslations() {
     const lKaw = document.querySelector('.lobby-txt-kawaii'); if (lKaw) lKaw.innerText = t.bldKawaii;
 
     const rLos = document.querySelector('.radio-txt-los40'); if (rLos) rLos.innerText = t.radioLos40 || 'LOS40';
-    const rRadX = document.querySelector('.radio-txt-radio-x'); if (rRadX) rRadX.innerText = t.radioRadioX || 'Radio X (Indie Rock)';
+    const rTrt = document.querySelector('.radio-txt-trt-radyo-3'); if (rTrt) rTrt.innerText = t.radioTrtRadyo3 || 'TRT Radyo 3';
+    const rChante = document.querySelector('.radio-txt-chante-france'); if (rChante) rChante.innerText = t.radioChanteFrance || 'Chante France';
+    const rFlash = document.querySelector('.radio-txt-flash-fm'); if (rFlash) rFlash.innerText = t.radioFlashFm || 'Flash FM';
+    const rLagos = document.querySelector('.radio-txt-lagos-jump'); if (rLagos) rLagos.innerText = t.radioLagosJump || 'LagosJump Radio';
+    const rRadX = document.querySelector('.radio-txt-radio-x'); if (rRadX) rRadX.innerText = t.radioRadioX || 'Radio X';
     const rCap = document.querySelector('.radio-txt-capital-fm'); if (rCap) rCap.innerText = t.radioCapitalFm || 'Capital FM';
     const rAsia = document.querySelector('.radio-txt-asia-dream'); if (rAsia) rAsia.innerText = t.radioAsiaDream || 'Asia DREAM Radio';
     const rKex = document.querySelector('.radio-txt-kexp'); if (rKex) rKex.innerText = t.radioKexp || 'KEXP 90.3 FM';
@@ -281,6 +296,10 @@ function applyTranslations() {
     const rFip = document.querySelector('.radio-txt-fip-paris'); if (rFip) rFip.innerText = t.radioFipParis || 'FIP Paris';
     const rPow = document.querySelector('.radio-txt-power-fm'); if (rPow) rPow.innerText = t.radioPowerFm || 'Power FM';
     const rCls = document.querySelector('.radio-txt-classic-fm'); if (rCls) rCls.innerText = t.radioClassicFm || 'Classic FM';
+
+    document.querySelectorAll('.txt-awaiting-audio').forEach(el => {
+        el.innerText = t.awaitingAudio || 'Awaiting audio...';
+    });
 
     const txtLoadVis = document.querySelector('.txt-load-visual'); if (txtLoadVis) txtLoadVis.innerText = t.loadVisual;
     const txtMyM = document.querySelector('.txt-my-music'); if (txtMyM) txtMyM.innerText = t.myMusic;
@@ -1202,6 +1221,7 @@ class AssetManager {
         this.isReverse = Math.random() > 0.5;
         this.currentVisualIndex = this.isReverse ? this.totalVisuals : 1;
         this.isVideoLoaded = false;
+        this.isCustomVisual = false;
         
         // İlk açılışta anında arka plan görselini bas (siyah ekranı tamamen önler)
         let th = normalizeTheme(this.currentTheme);
@@ -1231,6 +1251,7 @@ class AssetManager {
 
     setupMobileVideoUnlock() {
         const unlock = () => {
+            if (this.isCustomVisual) return;
             if (this.bgVideo) {
                 const extScreen = document.getElementById('extension-screen');
                 const isExtensionVisible = extScreen && !extScreen.classList.contains('ext-hidden');
@@ -1277,6 +1298,8 @@ class AssetManager {
 
     loadCurrentVideo(themeName = null) {
         if (!this.bgVideo) return;
+        this.bgVideo.style.display = 'block';
+        this.bgVideo.style.opacity = '1';
         if (themeName) {
             this.currentTheme = normalizeTheme(themeName);
         }
@@ -1324,6 +1347,11 @@ class AssetManager {
     }
 
     selectScene(index) {
+        this.isCustomVisual = false;
+        if (this.bgVideo) {
+            this.bgVideo.style.display = 'block';
+            this.bgVideo.style.opacity = '1';
+        }
         this.currentVisualIndex = index;
         this.updateBackground();
         this.startSlideshow();
@@ -1347,6 +1375,11 @@ class AssetManager {
     }
 
     changeVisualTheme(themeName, resetIndex = true) {
+        this.isCustomVisual = false;
+        if (this.bgVideo) {
+            this.bgVideo.style.display = 'block';
+            this.bgVideo.style.opacity = '1';
+        }
         this.currentTheme = normalizeTheme(themeName);
         if (resetIndex) this.currentVisualIndex = this.isReverse ? this.totalVisuals : 1;
         this.updateBackground();
@@ -1574,82 +1607,105 @@ class AudioManager {
         this.freqKeys = Object.keys(this.frequencies);
         this.currentFreqIndex = 0;
 
-        // Canlı Radyo İstasyonları (Dünyanın Dört Bir Yanından Popüler İstasyonlar: LOS40, Radio X, Capital FM, Asia DREAM, vb.)
+        // Canlı Radyo İstasyonları (Kural: İstasyon Ülke/Bölge (Şehir - Müzik Türleri))
         this.radioStations = {
             'los40': {
                 id: 'los40',
                 name: { en: 'LOS40', tr: 'LOS40' },
                 url: 'https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40.mp3',
-                credit: { en: 'Live: LOS40 España (Madrid - Pop & Hits)', tr: 'Canlı: LOS40 İspanya (Madrid - Popüler Hit Müzik)' }
+                credit: { en: 'Live: LOS40 España (Madrid - Pop & Hits)', tr: 'Canlı: LOS40 İspanya (Madrid - Pop & Hit)' }
+            },
+            'trt-radyo-3': {
+                id: 'trt-radyo-3',
+                name: { en: 'TRT Radyo 3', tr: 'TRT Radyo 3' },
+                url: 'https://rd-trtradyo3.medya.trt.com.tr/master_128.m3u8',
+                credit: { en: 'Live: TRT Radyo 3 (Ankara - Classical & Jazz)', tr: 'Canlı: TRT Radyo 3 (Ankara - Klasik Müzik & Caz)' }
+            },
+            'chante-france': {
+                id: 'chante-france',
+                name: { en: 'Chante France', tr: 'Chante France' },
+                url: 'https://chantefrance.ice.infomaniak.ch/chantefrance-128.mp3',
+                credit: { en: 'Live: Chante France (Paris - Chanson & Retro Pop)', tr: 'Canlı: Chante France (Paris - Şanson & Retro Pop)' }
+            },
+            'flash-fm': {
+                id: 'flash-fm',
+                name: { en: 'Flash FM', tr: 'Flash FM' },
+                url: 'https://audio.gtaradio.net/vc/flash',
+                credit: { en: 'Live: Flash FM (Vice City - 80s Pop & New Wave)', tr: 'Canlı: Flash FM (Vice City - 80\'ler Pop & New Wave)' }
+            },
+            'lagos-jump': {
+                id: 'lagos-jump',
+                name: { en: 'LagosJump Radio', tr: 'LagosJump Radio' },
+                url: 'https://radio.lagosjumpradio.com/listen/lagosjump_radio/radio.mp3',
+                credit: { en: 'Live: LagosJump Radio (Lagos - Afrobeats & Afro-Pop)', tr: 'Canlı: LagosJump Radio (Lagos - Afrobeats & Afro-Pop)' }
             },
             'radio-x': {
                 id: 'radio-x',
-                name: { en: 'Radio X (Indie Rock)', tr: 'Radio X (Indie Rock)' },
+                name: { en: 'Radio X', tr: 'Radio X' },
                 url: 'https://media-ssl.musicradio.com/RadioXUK',
-                credit: { en: 'Live: Radio X UK (London - Muse, Radiohead, The Cure, Arctic Monkeys)', tr: 'Canlı: Radio X UK (Londra - Muse, Radiohead, The Cure, Arctic Monkeys)' }
+                credit: { en: 'Live: Radio X (London - Indie & Alternative Rock)', tr: 'Canlı: Radio X (Londra - Indie & Alternatif Rock)' }
             },
             'capital-fm': {
                 id: 'capital-fm',
                 name: { en: 'Capital FM', tr: 'Capital FM' },
                 url: 'https://media-ssl.musicradio.com/CapitalUK',
-                credit: { en: 'Live: Capital FM (London - The UK\'s No. 1 Hit Music Station)', tr: 'Canlı: Capital FM (Londra - Birleşik Krallık 1 Numaralı Hit Müzik)' }
+                credit: { en: 'Live: Capital FM (London - Top 40 & Pop Hits)', tr: 'Canlı: Capital FM (Londra - Top 40 & Pop Hit)' }
             },
             'asia-dream': {
                 id: 'asia-dream',
                 name: { en: 'Asia DREAM Radio', tr: 'Asia DREAM Radio' },
                 url: 'https://quincy.torontocast.com:2020/stream.mp3',
-                credit: { en: 'Live: Asia DREAM Radio (Tokyo - J-Pop, City Pop & Asian Hits)', tr: 'Canlı: Asia DREAM Radio (Tokyo - J-Pop, City Pop & Asya Hitleri)' }
+                credit: { en: 'Live: Asia DREAM Radio (Tokyo - J-Pop & City Pop)', tr: 'Canlı: Asia DREAM Radio (Tokyo - J-Pop & City Pop)' }
             },
             'kexp': {
                 id: 'kexp',
                 name: { en: 'KEXP 90.3 FM', tr: 'KEXP 90.3 FM' },
                 url: 'https://kexp.streamguys1.com/kexp128.mp3',
-                credit: { en: 'Live: KEXP 90.3 FM (Seattle - Where the Music Matters)', tr: 'Canlı: KEXP 90.3 FM (Seattle - Bağımsız & Alternatif)' }
+                credit: { en: 'Live: KEXP 90.3 FM (Seattle - Indie & Alternative)', tr: 'Canlı: KEXP 90.3 FM (Seattle - Bağımsız & Alternatif)' }
             },
             'radio-paradise': {
                 id: 'radio-paradise',
                 name: { en: 'Radio Paradise', tr: 'Radio Paradise' },
                 url: 'https://stream.radioparadise.com/mp3-128',
-                credit: { en: 'Live: Radio Paradise (California - Eclectic Rock & Chill)', tr: 'Canlı: Radio Paradise (Kaliforniya - Eklektik Rock & Akustik)' }
+                credit: { en: 'Live: Radio Paradise (California - Eclectic Rock & Chill)', tr: 'Canlı: Radio Paradise (Kaliforniya - Eklektik Rock & Chill)' }
             },
             'fip-paris': {
                 id: 'fip-paris',
-                name: { en: 'FIP Paris', tr: 'FIP Paris' },
+                name: { en: 'FIP', tr: 'FIP' },
                 url: 'https://icecast.radiofrance.fr/fip-midfi.mp3',
-                credit: { en: 'Live: FIP Radio France (Paris - Eclectic, Jazz & Groove)', tr: 'Canlı: FIP Radio France (Paris - Eklektik, Caz & Groove)' }
+                credit: { en: 'Live: FIP (Paris - Eclectic, Jazz & Groove)', tr: 'Canlı: FIP (Paris - Eklektik, Caz & Groove)' }
             },
             'power-fm': {
                 id: 'power-fm',
                 name: { en: 'Power FM', tr: 'Power FM' },
                 url: 'https://listen.powerapp.com.tr/powerfm/mpeg/icecast.audio',
-                credit: { en: 'Live: Power FM (Istanbul - Top 40 & Global Hits)', tr: 'Canlı: Power FM (İstanbul - Hit Müzik & Listeler)' }
+                credit: { en: 'Live: Power FM (Istanbul - Pop & Hits)', tr: 'Canlı: Power FM (İstanbul - Pop & Hit)' }
             },
             'classic-fm': {
                 id: 'classic-fm',
                 name: { en: 'Classic FM', tr: 'Classic FM' },
                 url: 'https://media-ssl.musicradio.com/ClassicFM',
-                credit: { en: 'Live: Classic FM (London - The World\'s Greatest Music)', tr: 'Canlı: Classic FM (Londra - Dünyanın En Sevilen Klasik Müzikleri)' }
+                credit: { en: 'Live: Classic FM (London - Classical)', tr: 'Canlı: Classic FM (Londra - Klasik Müzik)' }
             }
         };
         // Canlı radyo istasyonlarının anahtar dizisi
-        this.radioKeys = ['los40', 'radio-x', 'capital-fm', 'asia-dream', 'kexp', 'radio-paradise', 'fip-paris', 'power-fm', 'classic-fm'];
+        this.radioKeys = ['los40', 'trt-radyo-3', 'chante-france', 'flash-fm', 'lagos-jump', 'radio-x', 'capital-fm', 'asia-dream', 'kexp', 'radio-paradise', 'fip-paris', 'power-fm', 'classic-fm'];
         // Geriye dönük uyumluluk takma adları (backward compatibility aliases)
-        this.radioStations['trt-radyo-3'] = this.radioStations['radio-x'];
         this.radioStations['bbc-world'] = this.radioStations['radio-x'];
         this.radioStations['nts-radio'] = this.radioStations['asia-dream'];
         this.radioStations['cowboy-era'] = this.radioStations['radio-x'];
-        this.radioStations['cyber-world'] = this.radioStations['capital-fm'];
+        this.radioStations['cyber-world'] = this.radioStations['flash-fm'];
         this.radioStations['dark-fantasy'] = this.radioStations['radio-paradise'];
-        this.radioStations['light-fantasy'] = this.radioStations['fip-paris'];
-        this.radioStations['jazz-romance'] = this.radioStations['classic-fm'];
+        this.radioStations['light-fantasy'] = this.radioStations['chante-france'];
+        this.radioStations['jazz-romance'] = this.radioStations['trt-radyo-3'];
         this.radioStations['rock-n-roll'] = this.radioStations['radio-x'];
         this.radioStations['the-pasific-crest'] = this.radioStations['classic-fm'];
         this.radioStations['milky-way'] = this.radioStations['asia-dream'];
-        this.radioStations['lofi'] = this.radioStations['radio-x'];
-        this.radioStations['synthwave'] = this.radioStations['capital-fm'];
+        this.radioStations['lofi'] = this.radioStations['chante-france'];
+        this.radioStations['synthwave'] = this.radioStations['flash-fm'];
         this.radioStations['space'] = this.radioStations['radio-paradise'];
         this.radioStations['piano-chill'] = this.radioStations['fip-paris'];
-        this.radioStations['jazz-cafe'] = this.radioStations['classic-fm'];
+        this.radioStations['jazz-cafe'] = this.radioStations['trt-radyo-3'];
         this.radioStations['welcome-to-oregon'] = this.radioStations['classic-fm'];
         this.radioStations['kawaii-space'] = this.radioStations['asia-dream'];
         this.currentRadioIndex = 0;
@@ -2573,17 +2629,18 @@ class AudioManager {
             this.uiFreqPlayPauseBtn.innerHTML = isFreqPlaying ? '&#10074;&#10074;' : '&#9654;';
         }
 
-        if (this.playerMode === 'freq' && this.currentFreqId) {
+        if (this.playerMode === 'freq' && this.currentFreqId && isFreqPlaying) {
             const freq = this.frequencies[this.currentFreqId];
             const cred = freq ? (freq.credit[currentLang] || freq.credit.en) : 'Frequency Playing';
             if (this.uiPlayerTrackCredit) this.uiPlayerTrackCredit.innerText = `${cred}`;
             if (this.uiFreqTrackCredit) this.uiFreqTrackCredit.innerText = `${cred}`;
-        } else if (this.playerMode === 'radio' && this.currentRadioStation) {
+        } else if (this.playerMode === 'radio' && this.currentRadioStation && isRadioPlaying) {
             const station = this.radioStations[this.currentRadioStation];
             const cred = station ? (station.credit[currentLang] || station.credit.en) : 'Live Radio';
             if (this.uiPlayerTrackCredit) this.uiPlayerTrackCredit.innerText = `${cred}`;
         } else {
             if (this.uiPlayerTrackCredit) this.uiPlayerTrackCredit.innerText = t.awaitingAudio;
+            if (this.uiFreqTrackCredit) this.uiFreqTrackCredit.innerText = t.awaitingAudio;
         }
     }
 
@@ -2889,8 +2946,10 @@ function handleVisualUpload(e) {
     const file = e.target.files[0];
     if (!file) return;
 
-    // Özel görsel yüklendiğinde otomatik slaytı durdur
-    if (window.theme) window.theme.stopSlideshow();
+    if (window.theme) {
+        window.theme.isCustomVisual = true;
+        window.theme.stopSlideshow();
+    }
 
     const fileReader = new FileReader();
     if (file.type.startsWith('video/')) {
@@ -2898,13 +2957,20 @@ function handleVisualUpload(e) {
             const videoDataUrl = event.target.result;
             const bgVideo = document.getElementById('bg-video');
             if (bgVideo) {
-                const source = bgVideo.querySelector('source');
-                if (source) source.src = videoDataUrl;
+                bgVideo.style.display = 'block';
+                bgVideo.style.opacity = '1';
+                let source = bgVideo.querySelector('source');
+                if (!source) {
+                    source = document.createElement('source');
+                    bgVideo.appendChild(source);
+                }
+                source.src = videoDataUrl;
+                bgVideo.src = videoDataUrl;
                 bgVideo.load();
                 bgVideo.play().then(() => {
                     bgVideo.classList.add('visible');
                     document.body.classList.add('video-active');
-                });
+                }).catch(() => {});
             }
         };
         fileReader.readAsDataURL(file);
@@ -2913,12 +2979,18 @@ function handleVisualUpload(e) {
             const imageDataUrl = event.target.result;
             const bgVideo = document.getElementById('bg-video');
             if (bgVideo) {
+                bgVideo.pause();
+                bgVideo.removeAttribute('src');
+                bgVideo.style.display = 'none';
+                bgVideo.style.opacity = '0';
                 bgVideo.classList.remove('visible');
                 document.body.classList.remove('video-active');
             }
             document.body.style.backgroundImage = `url('${imageDataUrl}')`;
             document.body.style.backgroundSize = 'cover';
-            document.body.style.backgroundPosition = 'center';
+            document.body.style.backgroundPosition = 'center center';
+            document.body.style.backgroundRepeat = 'no-repeat';
+            document.body.style.backgroundColor = '#000';
         };
         fileReader.readAsDataURL(file);
     }
@@ -2927,9 +2999,39 @@ function handleVisualUpload(e) {
 function applyVisualUrl() {
     const input = document.getElementById('visual-url');
     if (!input || !input.value.trim()) return;
-    let url = input.value.trim();
+    let url = input.value.trim().replace(/^['"]+|['"]+$/g, '');
 
-    // Pinterest Pin Sayfa Linki Kontrolü (pinterest.com/pin/ veya pin.it/)
+    // 1. Google Görseller arama linki tespiti ve asıl görsel linkini ayıklama
+    if (url.includes('google.') && url.includes('imgurl=')) {
+        try {
+            const u = new URL(url);
+            const imgurl = u.searchParams.get('imgurl');
+            if (imgurl) url = decodeURIComponent(imgurl);
+        } catch (e) {}
+    }
+
+    // 2. Giphy web sayfası bağlantısı tespiti (örn: giphy.com/gifs/dance-happy-l0MYt5jPR6QX5pnqM veya /gifs/l0MYt5jPR6QX5pnqM)
+    const giphyMatch = url.match(/giphy\.com\/gifs\/(?:.*-)?([a-zA-Z0-9]+)$/i);
+    if (giphyMatch && giphyMatch[1]) {
+        url = `https://i.giphy.com/media/${giphyMatch[1]}/giphy.gif`;
+    }
+
+    // 3. Imgur sayfa linki tespiti (uzantısız linkleri doğrudan resme çevir)
+    const imgurMatch = url.match(/^https?:\/\/(?:i\.)?imgur\.com\/([a-zA-Z0-9]+)(?:\.[a-zA-Z0-9]+)?$/i);
+    if (imgurMatch && imgurMatch[1] && !url.includes('.')) {
+        url = `https://i.imgur.com/${imgurMatch[1]}.gif`;
+    }
+
+    // 4. Tenor Sayfa Linki Kontrolü
+    if (url.includes('tenor.com') && !url.includes('.gif') && !url.includes('.mp4')) {
+        const msg = currentLang === 'tr'
+            ? "Tenor sayfa bağlantısı yerine lütfen GIF üzerine sağ tıklayıp 'Resim adresini kopyala' seçeneğini kullanarak doğrudan .gif bağlantısını yapıştırın."
+            : "Instead of Tenor page link, please right click the GIF and choose 'Copy Image Address' to paste the direct .gif link.";
+        alert(msg);
+        return;
+    }
+
+    // 5. Pinterest Pin Sayfa Linki Kontrolü (pinterest.com/pin/ veya pin.it/)
     if ((url.includes('pinterest.com') || url.includes('pin.it')) && !url.includes('pinimg.com')) {
         const msg = currentLang === 'tr' 
             ? "Pinterest sayfa bağlantısı yerine, görselin üzerine SAĞ TIKLAYIP 'Resim adresini kopyala' seçeneğini seçin ve doğrudan resim linkini (.jpg / .gif / .png) buraya yapıştırın!"
@@ -2938,14 +3040,25 @@ function applyVisualUrl() {
         return;
     }
 
-    // Özel URL uygulandığında otomatik slaytı durdur
-    if (window.theme) window.theme.stopSlideshow();
+    // Özel görsel modunu aç ve slaytı/videoyu dondur
+    if (window.theme) {
+        window.theme.isCustomVisual = true;
+        window.theme.stopSlideshow();
+    }
+
+    const bgVideo = document.getElementById('bg-video');
 
     if (url.match(/\.(mp4|webm|ogg)$/i) || url.includes('video')) {
-        const bgVideo = document.getElementById('bg-video');
         if (bgVideo) {
-            const source = bgVideo.querySelector('source');
-            if (source) source.src = url;
+            bgVideo.style.display = 'block';
+            bgVideo.style.opacity = '1';
+            let source = bgVideo.querySelector('source');
+            if (!source) {
+                source = document.createElement('source');
+                bgVideo.appendChild(source);
+            }
+            source.src = url;
+            bgVideo.src = url;
             bgVideo.load();
             bgVideo.play().then(() => {
                 bgVideo.classList.add('visible');
@@ -2956,20 +3069,39 @@ function applyVisualUrl() {
             });
         }
     } else {
-        const bgVideo = document.getElementById('bg-video');
         if (bgVideo) {
+            bgVideo.pause();
+            bgVideo.removeAttribute('src');
+            bgVideo.style.display = 'none';
+            bgVideo.style.opacity = '0';
             bgVideo.classList.remove('visible');
             document.body.classList.remove('video-active');
         }
         document.body.style.backgroundImage = `url('${url}')`;
         document.body.style.backgroundSize = 'cover';
-        document.body.style.backgroundPosition = 'center';
+        document.body.style.backgroundPosition = 'center center';
+        document.body.style.backgroundRepeat = 'no-repeat';
+        document.body.style.backgroundColor = '#000';
+
+        // Preload testi (hatayı sessizce yakalar ve konsola yazar)
+        const testImg = new Image();
+        testImg.onerror = () => {
+            console.warn("Özel görsel linki yüklenemedi veya CORS/hotlink engellendi:", url);
+        };
+        testImg.src = url;
     }
 }
 
 function resetToThemeVisual() {
     if (window.theme) {
+        window.theme.isCustomVisual = false;
+        const bgVideo = document.getElementById('bg-video');
+        if (bgVideo) {
+            bgVideo.style.display = 'block';
+            bgVideo.style.opacity = '1';
+        }
         window.theme.updateBackground();
+        window.theme.loadCurrentVideo();
         window.theme.startSlideshow();
         window.theme.updateSceneCardsUI();
     }
@@ -3836,6 +3968,13 @@ class MapManager {
                 window.audioManager.prepareLobby(normalized);
             }
 
+            // Mobilde haritadan yatay girildiyse (sinematik görsel açıldığı için),
+            // kullanıcıya konsolun varlığını 3.2 saniye hissettiren solan ipucunu tetikle
+            const isMobileLandscape = window.matchMedia && window.matchMedia('(max-width: 950px) and (orientation: landscape), (max-height: 550px) and (orientation: landscape)').matches;
+            if (isMobileLandscape && typeof window.showCinemaRotateHint === 'function') {
+                window.showCinemaRotateHint();
+            }
+
             // Spot efektini temizle
             document.querySelectorAll('.building-hotspot').forEach(s => s.classList.remove('entering'));
         }, 350);
@@ -4679,6 +4818,34 @@ if (document.readyState === 'loading') {
 window.lastActiveTabName = null; 
 window.lastActiveTabId = null;
 
+window.showCinemaRotateHint = function() {
+    const hint = document.getElementById('cinema-rotate-hint');
+    if (!hint) return;
+
+    const t = (typeof translations !== 'undefined' && translations[currentLang]) ? translations[currentLang] : translations.tr;
+    const txtSpan = hint.querySelector('.txt-rotate-for-console');
+    if (txtSpan && t && t.rotateForConsole) {
+        txtSpan.innerText = t.rotateForConsole;
+    }
+
+    hint.style.display = 'flex';
+    hint.classList.remove('fade-out');
+    void hint.offsetWidth;
+    hint.classList.add('show');
+
+    if (window._cinemaHintTimer) clearTimeout(window._cinemaHintTimer);
+    if (window._cinemaHintFadeTimer) clearTimeout(window._cinemaHintFadeTimer);
+
+    window._cinemaHintTimer = setTimeout(() => {
+        hint.classList.remove('show');
+        hint.classList.add('fade-out');
+        window._cinemaHintFadeTimer = setTimeout(() => {
+            hint.style.display = 'none';
+            hint.classList.remove('fade-out');
+        }, 1300);
+    }, 3200);
+};
+
 function enforceLandscapeProtection() {
     const isExtVisible = window.extensionManager && window.extensionManager.screen && !window.extensionManager.screen.classList.contains('ext-hidden');
     const isMapVisible = window.mapManager && window.mapManager.screen && !window.mapManager.screen.classList.contains('map-hidden');
@@ -4725,6 +4892,12 @@ function enforceLandscapeProtection() {
         }
     } else { 
         // Dikey modda: Otomatik olarak 3. Sayfa (Normal Konsol Görünümü)
+        const rotHint = document.getElementById('cinema-rotate-hint');
+        if (rotHint) {
+            rotHint.style.display = 'none';
+            rotHint.classList.remove('show', 'fade-out');
+        }
+
         if (document.body.classList.contains('fullscreen-mode')) {
             document.body.classList.remove('fullscreen-mode', 'cinematic-mode');
             if (fsTxt && t) fsTxt.innerText = t.fullscreen;
